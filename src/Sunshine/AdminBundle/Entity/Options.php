@@ -1,16 +1,16 @@
 <?php
 
-namespace Sunshine\OrganizationBundle\Entity;
+namespace Sunshine\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BusinessUnit
+ * Options
  *
- * @ORM\Table(name="business_unit")
- * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\BusinessUnitRepository")
+ * @ORM\Table(name="options")
+ * @ORM\Entity(repositoryClass="Sunshine\AdminBundle\Repository\OptionsRepository")
  */
-class BusinessUnit
+class Options
 {
     /**
      * @var int
@@ -20,6 +20,24 @@ class BusinessUnit
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    protected $name;
+
+    protected $value;
+
+    /**
+     * @var Choice
+     *
+     * @ORM\ManyToOne(targetEntity="Sunshine\AdminBundle\Entity\Choice", inversedBy="options")
+     * @ORM\JoinColumn(name="choice_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $source;
+
+    protected $orderNumber;
+
+    protected $enabled;
+
+    protected $enabledSearch;
 
     /**
      * @var \DateTime $createdAt
@@ -34,7 +52,6 @@ class BusinessUnit
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
-
 
     /**
      * Get id

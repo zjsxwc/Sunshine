@@ -1,3 +1,8 @@
+sunshine_admin:
+    resource: "@SunshineAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 sunshine_organization:
     resource: "@SunshineOrganizationBundle/Controller/"
     type:     annotation
