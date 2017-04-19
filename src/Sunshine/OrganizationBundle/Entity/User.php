@@ -46,7 +46,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=60, unique==true, nullable=true)
+     * @ORM\Column(name="email", type="string", length=60, unique=true, nullable=true)
      */
     protected $email;
 
@@ -255,6 +255,16 @@ class User implements AdvancedUserInterface, \Serializable
     public function beforeSave()
     {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    /**
+     * Pre update event listener
+     *
+     * @ORM\PreUpdate
+     */
+    public function beforeUpdate()
+    {
         $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
     }
 
