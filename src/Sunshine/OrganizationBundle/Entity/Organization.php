@@ -606,4 +606,45 @@ class Organization
     {
         return $this->type;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->company = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add company
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\Company $company
+     *
+     * @return Organization
+     */
+    public function addCompany(\Sunshine\OrganizationBundle\Entity\Company $company)
+    {
+        $this->company[] = $company;
+
+        return $this;
+    }
+
+    /**
+     * Remove company
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\Company $company
+     */
+    public function removeCompany(\Sunshine\OrganizationBundle\Entity\Company $company)
+    {
+        $this->company->removeElement($company);
+    }
+
+    /**
+     * Get company
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
 }

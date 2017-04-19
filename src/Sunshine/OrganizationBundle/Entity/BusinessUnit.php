@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * BusinessUnit
  *
- * @ORM\Table(name="business_organization_unit",
+ * @ORM\Table(name="business_organization_business_unit",
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
  *     indexes={
  *         @ORM\Index(name="idx_business_unit_name", columns={"name"}),
@@ -122,6 +122,22 @@ class BusinessUnit implements GedmoNode
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @var User[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="User", mappedBy="businessUnit")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     */
+    protected $users;
+
+    /**
+     * @var WorkGroup[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Sunshine\OrganizationBundle\Entity\WorkGroup", mappedBy="businessUnit")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     */
+    protected $groups;
 
     /**
      * 部门所属公司
@@ -735,5 +751,73 @@ class BusinessUnit implements GedmoNode
     public function getRoot()
     {
         return $this->root;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\User $user
+     *
+     * @return BusinessUnit
+     */
+    public function addUser(\Sunshine\OrganizationBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\User $user
+     */
+    public function removeUser(\Sunshine\OrganizationBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Add group
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\WorkGroup $group
+     *
+     * @return BusinessUnit
+     */
+    public function addGroup(\Sunshine\OrganizationBundle\Entity\WorkGroup $group)
+    {
+        $this->groups[] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Remove group
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\WorkGroup $group
+     */
+    public function removeGroup(\Sunshine\OrganizationBundle\Entity\WorkGroup $group)
+    {
+        $this->groups->removeElement($group);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 }

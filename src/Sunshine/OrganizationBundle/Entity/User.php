@@ -14,7 +14,7 @@ use Sunshine\OrganizationBundle\Entity\Organization;
 /**
  * User
  *
- * @ORM\Table(name="sunshine_user", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table(name="business_organization_user", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -90,6 +90,14 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\JoinColumn(name="user_business_unit_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $businessUnit;
+
+    /**
+     * @var Company
+     *
+     * @ORM\ManyToOne(targetEntity="Sunshine\OrganizationBundle\Entity\Company", inversedBy="users")
+     * @ORM\JoinColumn(name="user_company_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $company;
 
     /**
      * 员工编号
@@ -900,5 +908,105 @@ class User implements AdvancedUserInterface, \Serializable
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set company
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\Company $company
+     *
+     * @return User
+     */
+    public function setCompany(\Sunshine\OrganizationBundle\Entity\Company $company = null)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return \Sunshine\OrganizationBundle\Entity\Company
+     */
+    public function getCompany()
+    {
+        return $this->company;
     }
 }

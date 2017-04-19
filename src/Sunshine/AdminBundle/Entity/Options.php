@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Options
  *
- * @ORM\Table(name="options")
+ * @ORM\Table(name="business_admin_options")
  * @ORM\Entity(repositoryClass="Sunshine\AdminBundle\Repository\OptionsRepository")
  */
 class Options

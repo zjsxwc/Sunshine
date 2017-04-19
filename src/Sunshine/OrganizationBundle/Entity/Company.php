@@ -8,7 +8,7 @@ use Sunshine\AdminBundle\Entity\Choice;
 /**
  * Company
  *
- * @ORM\Table(name="sunshine_organization_company", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table(name="business_organization_organization", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\CompanyRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -145,6 +145,14 @@ class Company
     protected $businessUnit;
 
     /**
+     * @var User[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Sunshine\OrganizationBundle\Entity\User", mappedBy="company", fetch="LAZY")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     */
+    protected $users;
+
+    /**
      * @var \DateTime $createdAt
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -221,5 +229,464 @@ class Company
     {
         return $this->id;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->businessUnit = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Company
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set foreignName
+     *
+     * @param string $foreignName
+     *
+     * @return Company
+     */
+    public function setForeignName($foreignName)
+    {
+        $this->foreignName = $foreignName;
+
+        return $this;
+    }
+
+    /**
+     * Get foreignName
+     *
+     * @return string
+     */
+    public function getForeignName()
+    {
+        return $this->foreignName;
+    }
+
+    /**
+     * Set alias
+     *
+     * @param string $alias
+     *
+     * @return Company
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    /**
+     * Get alias
+     *
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
+     * Set legalPerson
+     *
+     * @param string $legalPerson
+     *
+     * @return Company
+     */
+    public function setLegalPerson($legalPerson)
+    {
+        $this->legalPerson = $legalPerson;
+
+        return $this;
+    }
+
+    /**
+     * Get legalPerson
+     *
+     * @return string
+     */
+    public function getLegalPerson()
+    {
+        return $this->legalPerson;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Company
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set zipCode
+     *
+     * @param string $zipCode
+     *
+     * @return Company
+     */
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipCode
+     *
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Company
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set fax
+     *
+     * @param string $fax
+     *
+     * @return Company
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+
+        return $this;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return string
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     *
+     * @return Company
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set mail
+     *
+     * @param string $mail
+     *
+     * @return Company
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    /**
+     * Get mail
+     *
+     * @return string
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * Set officeAddress
+     *
+     * @param string $officeAddress
+     *
+     * @return Company
+     */
+    public function setOfficeAddress($officeAddress)
+    {
+        $this->officeAddress = $officeAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get officeAddress
+     *
+     * @return string
+     */
+    public function getOfficeAddress()
+    {
+        return $this->officeAddress;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Company
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Company
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Company
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \Sunshine\AdminBundle\Entity\Choice $type
+     *
+     * @return Company
+     */
+    public function setType(\Sunshine\AdminBundle\Entity\Choice $type = null)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \Sunshine\AdminBundle\Entity\Choice
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\Organization $organization
+     *
+     * @return Company
+     */
+    public function setOrganization(\Sunshine\OrganizationBundle\Entity\Organization $organization = null)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Sunshine\OrganizationBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
+
+    /**
+     * Add businessUnit
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\BusinessUnit $businessUnit
+     *
+     * @return Company
+     */
+    public function addBusinessUnit(\Sunshine\OrganizationBundle\Entity\BusinessUnit $businessUnit)
+    {
+        $this->businessUnit[] = $businessUnit;
+
+        return $this;
+    }
+
+    /**
+     * Remove businessUnit
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\BusinessUnit $businessUnit
+     */
+    public function removeBusinessUnit(\Sunshine\OrganizationBundle\Entity\BusinessUnit $businessUnit)
+    {
+        $this->businessUnit->removeElement($businessUnit);
+    }
+
+    /**
+     * Get businessUnit
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBusinessUnit()
+    {
+        return $this->businessUnit;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\User $user
+     *
+     * @return Company
+     */
+    public function addUser(\Sunshine\OrganizationBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Sunshine\OrganizationBundle\Entity\User $user
+     */
+    public function removeUser(\Sunshine\OrganizationBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+}

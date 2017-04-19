@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * OrganizationRole
  *
- * @ORM\Table(name="organization_role")
+ * @ORM\Table(name="business_organization_organization_role")
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\OrganizationRoleRepository")
  */
 class OrganizationRole
@@ -44,5 +44,52 @@ class OrganizationRole
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return OrganizationRole
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return OrganizationRole
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+}
