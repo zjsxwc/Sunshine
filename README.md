@@ -7,7 +7,7 @@ Sunshine 项目概述
 
 1. Symfony 3 基础框架 (目前是3.2.7)
 2. 三方 Bundle
-   * FOSUserBundle(用户管理)
+  - 暂无
 ###源码目录结构
 全部代码在 src 目录下，分为几个 Bundle:
 1. OrganizationBundle 组织、公司、部门、用户等组织机构相关信息的包。
