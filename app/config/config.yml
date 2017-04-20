@@ -30,7 +30,18 @@ framework:
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments: ~
     http_method_override: true
-    assets: ~
+    assets:
+        packages:
+            ui:
+                base_path: /bundles/sunshineui/
+            lte:
+                base_path: /bundles/sunshineui/AdminLTE/
+            css:
+                base_path: /bundles/sunshineui/css/
+            js:
+                base_path: /bundles/sunshineui/js/
+            img:
+                base_path: /bundles/sunshineui/img/
     php_errors:
         log: true
 

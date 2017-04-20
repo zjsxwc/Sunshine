@@ -6,7 +6,8 @@ Sunshine 项目概述
 ### 技术栈
 
 1. Symfony 3 基础框架 (目前是3.2.7)
-2. 三方 Bundle
+2. 前端UI
+3. 三方 Bundle
   - gedmo/doctrine-extensions (目前使用其中的tree)
     https://github.com/Atlantic18/DoctrineExtensions
 
