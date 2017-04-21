@@ -6,7 +6,7 @@ sunshine_ui:
 sunshine_admin:
     resource: "@SunshineAdminBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /admin
 
 sunshine_organization:
     resource: "@SunshineOrganizationBundle/Controller/"

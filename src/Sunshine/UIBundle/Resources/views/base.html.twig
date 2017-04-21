@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}Sunshine OA{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css', 'lte') }}">
+        <link rel="stylesheet" href="{{ asset('libs/font-awesome/css/font-awesome.min.css', 'lte') }}">
+        <link rel="stylesheet" href="{{ asset('libs/ionicons.min.css', 'lte') }}">
+        <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css', 'lte') }}">
+        <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue.min.css', 'lte') }}">
+    {% endblock %}
+    <!--[if lt IE 9]>
+    <script src="{{ asset('libs/html5shiv.min.js', 'lte') }}"></script>
+    <script src="{{ asset('libs/respond.min.js', 'lte') }}"></script>
+    <![endif]-->
+    {% block topScript %}{% endblock topScript %}
+    <!-- Todo 添加icon -->
+    <!-- <link rel="icon" type="image/x-icon" href="" /> -->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+{% block body %}
+
+{% endblock %}
+
+<!-- 底部的JavaScript -->
+{% block bottomScript %}
+    <!-- jQuery 2.2.3 -->
+    <script src="{{ asset('plugins/jQuery/jquery-2.2.3.min.js', 'lte') }}"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js', 'lte') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('dist/js/app.min.js', 'lte') }}"></script>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+</body>
+</html>
