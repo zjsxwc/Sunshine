@@ -10,6 +10,8 @@ Sunshine 项目概述
 3. 三方 Bundle
   - gedmo/doctrine-extensions (目前使用其中的tree)
     https://github.com/Atlantic18/DoctrineExtensions
+  - hautelook/alice-bundle (版本使用了 1.4，而不是 2.0 beta。用于填充初始和示例数据。)
+    https://github.com/hautelook/AliceBundle/tree/1.x
 
 ### 源码目录结构
 
@@ -63,3 +65,23 @@ Sunshine 项目概述
     * 单位角色设置
     * 工作范围控制
     * 单位标识配置
+    
+### UI说明
+
+1. 组织创建、编辑界面
+    * 左侧，单位基本信息：
+        * 组织名称
+        * 外文名称
+        * 组织简称
+    * 左侧, 系统管理信息
+        * 管理员登录名(默认 admin1)
+    * 右侧, 组织说明信息
+        * 单位类型(下拉框选取)
+        * 负责人(法人)
+        * 地址(公司注册地址)
+        * 邮编
+        * 电话
+        * 传真
+        * 网站
+        * 邮件地址
+     * 右侧, 单位描述(text)

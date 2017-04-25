@@ -8,7 +8,7 @@ use Sunshine\AdminBundle\Entity\Choice;
 /**
  * Title
  *
- * @ORM\Table(name="business_organization_title", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table(name="sunshine_organization_title", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\TitleRepository")
  * @ORM\HasLifecycleCallbacks()
  */

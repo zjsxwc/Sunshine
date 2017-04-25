@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ServiceGrade
  *
- * @ORM\Table(name="business_organization_service_grade", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table(name="sunshine_organization_service_grade", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\ServiceGradeRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -61,6 +61,14 @@ class ServiceGrade
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @var User[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Sunshine\OrganizationBundle\Entity\User", mappedBy="serviceGrade")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     */
+    protected $users;
 
     /**
      * @var \DateTime $createdAt

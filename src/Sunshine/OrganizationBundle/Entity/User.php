@@ -14,7 +14,7 @@ use Sunshine\OrganizationBundle\Entity\Organization;
 /**
  * User
  *
- * @ORM\Table(name="business_organization_user", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table(name="sunshine_organization_user", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -128,7 +128,7 @@ class User implements AdvancedUserInterface, \Serializable
      * 副岗
      * @var Second Title
      *
-     * @ORM\ManyToOne(targetEntity="Title", inversedBy="users", cascade="persist")
+     * @ORM\ManyToOne(targetEntity="Title", inversedBy="secondTitleUsers", cascade="persist")
      * @ORM\JoinColumn(name="second_title", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $secondTitle;

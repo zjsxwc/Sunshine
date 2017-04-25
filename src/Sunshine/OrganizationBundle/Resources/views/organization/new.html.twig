@@ -1,0 +1,9 @@
+{% extends "@SunshineOrganization/layout.html.twig" %}
+
+{% block main_content %}
+    {{ parent() }}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(form) }}
+{% endblock %}

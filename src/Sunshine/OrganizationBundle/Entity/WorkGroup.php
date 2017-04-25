@@ -8,7 +8,7 @@ use Sunshine\AdminBundle\Entity\Choice;
 /**
  * WorkGroup
  *
- * @ORM\Table(name="business_organization_work_group", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table(name="sunshine_organization_work_group", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\WorkGroupRepository")
  * @ORM\HasLifecycleCallbacks()
  */

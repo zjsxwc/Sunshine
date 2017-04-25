@@ -4,7 +4,6 @@ namespace Sunshine\OrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sunshine\AdminBundle\Entity\Admin;
-use Sunshine\AdminBundle\Entity\Choice;
 
 /**
  * Organization
@@ -59,10 +58,10 @@ class Organization
 
     /**
      * 公司类型
-     * @var Choice
+     * @var Options
      *
-     * @ORM\OneToOne(targetEntity="Sunshine\AdminBundle\Entity\Choice")
-     * @ORM\JoinColumn(name="organization_type_choice_id", referencedColumnName="id", nullable=true)
+     * @ORM\OneToOne(targetEntity="Sunshine\AdminBundle\Entity\Options")
+     * @ORM\JoinColumn(name="organization_type_options_id", referencedColumnName="id", nullable=true)
      */
     protected $type;
 
@@ -586,11 +585,11 @@ class Organization
     /**
      * Set type
      *
-     * @param \Sunshine\AdminBundle\Entity\Choice $type
+     * @param \Sunshine\AdminBundle\Entity\Options $type
      *
      * @return Organization
      */
-    public function setType(\Sunshine\AdminBundle\Entity\Choice $type = null)
+    public function setType(\Sunshine\AdminBundle\Entity\Options $type = null)
     {
         $this->type = $type;
 
@@ -600,7 +599,7 @@ class Organization
     /**
      * Get type
      *
-     * @return \Sunshine\AdminBundle\Entity\Choice
+     * @return \Sunshine\AdminBundle\Entity\Options
      */
     public function getType()
     {

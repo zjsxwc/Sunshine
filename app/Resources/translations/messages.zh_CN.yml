@@ -1,0 +1,34 @@
+sunshine:
+    menu:
+        label: 菜单
+        organization: 组织架构管理
+        org: 组织管理
+        company: 单位管理
+        bu: 部门管理
+        title: 岗位管理
+        serviceGrade: 职务级别管理
+        user: 人员管理
+        workGroup: 工作组管理
+        companyRole: 单位角色管理
+        workScope: 工作范围控制
+        logo: 单位标识配置
+    form:
+        editSubmit: 编辑提交
+    organization:
+        form:
+            org:
+                name: 组织名称
+                foreignName: 外文名称
+                alias: 组织简称
+                legalPerson: 负责人
+                address: 地址
+                zipCode: 邮编
+                phone: 电话
+                fax: 传真
+                website: 网站
+                mail: 电子邮箱
+                officeAddress: 邮件地址
+                description: 组织描述
+                admin: 管理员登录名
+                type: 组织类型
+                chooseOne: 选取一个

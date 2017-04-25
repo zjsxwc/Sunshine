@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * OrganizationRole
  *
- * @ORM\Table(name="business_organization_organization_role")
+ * @ORM\Table(name="sunshine_organization_organization_role")
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\OrganizationRoleRepository")
  */
 class OrganizationRole

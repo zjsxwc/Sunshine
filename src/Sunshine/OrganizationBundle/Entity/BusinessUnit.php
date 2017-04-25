@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * BusinessUnit
  *
- * @ORM\Table(name="business_organization_business_unit",
+ * @ORM\Table(name="sunshine_organization_business_unit",
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
  *     indexes={
  *         @ORM\Index(name="idx_business_unit_name", columns={"name"}),
