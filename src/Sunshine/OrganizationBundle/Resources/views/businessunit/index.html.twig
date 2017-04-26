@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Businessunits list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Ordernumber</th>
+                <th>Enabled</th>
+                <th>Createspace</th>
+                <th>Description</th>
+                <th>Lft</th>
+                <th>Lvl</th>
+                <th>Rgt</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for businessUnit in businessUnits %}
+            <tr>
+                <td><a href="{{ path('admin_org_bu_show', { 'id': businessUnit.id }) }}">{{ businessUnit.id }}</a></td>
+                <td>{{ businessUnit.name }}</td>
+                <td>{{ businessUnit.code }}</td>
+                <td>{{ businessUnit.orderNumber }}</td>
+                <td>{% if businessUnit.enabled %}Yes{% else %}No{% endif %}</td>
+                <td>{% if businessUnit.createSpace %}Yes{% else %}No{% endif %}</td>
+                <td>{{ businessUnit.description }}</td>
+                <td>{{ businessUnit.lft }}</td>
+                <td>{{ businessUnit.lvl }}</td>
+                <td>{{ businessUnit.rgt }}</td>
+                <td>{% if businessUnit.createdAt %}{{ businessUnit.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if businessUnit.updatedAt %}{{ businessUnit.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_org_bu_show', { 'id': businessUnit.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_org_bu_edit', { 'id': businessUnit.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_org_bu_new') }}">Create a new businessUnit</a>
+        </li>
+    </ul>
+{% endblock %}

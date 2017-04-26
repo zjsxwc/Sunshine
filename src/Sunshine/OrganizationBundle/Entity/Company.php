@@ -2,8 +2,10 @@
 
 namespace Sunshine\OrganizationBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sunshine\AdminBundle\Entity\Choice;
+use Sunshine\AdminBundle\Entity\Options;
 
 /**
  * Company
@@ -35,7 +37,7 @@ class Company
      * 外文名称
      * @var string
      *
-     * @ORM\Column(name="foreign_name", type="string", length=255)
+     * @ORM\Column(name="foreign_name", type="string", length=255, nullable=true)
      */
     protected $foreignName;
 
@@ -43,16 +45,16 @@ class Company
      * 公司简称
      * @var string
      *
-     * @ORM\Column(name="alias_name", type="string", length=20)
+     * @ORM\Column(name="alias_name", type="string", length=20, nullable=true)
      */
     protected $alias;
 
     /**
      * 公司类型
-     * @var Choice
+     * @var Options
      *
-     * @ORM\OneToOne(targetEntity="Sunshine\AdminBundle\Entity\Choice")
-     * @ORM\JoinColumn(name="organization_type_choice_id", referencedColumnName="id", nullable=true)
+     * @ORM\OneToOne(targetEntity="Sunshine\AdminBundle\Entity\Options")
+     * @ORM\JoinColumn(name="organization_type_options_id", referencedColumnName="id", nullable=true)
      */
     protected $type;
 
@@ -60,7 +62,7 @@ class Company
      * 法人
      * @var string
      *
-     * @ORM\Column(name="legal_person", type="string", length=50)
+     * @ORM\Column(name="legal_person", type="string", length=50, nullable=true)
      */
     protected $legalPerson;
 
@@ -68,7 +70,7 @@ class Company
      * 地址
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     protected $address;
 
@@ -76,7 +78,7 @@ class Company
      * 邮政编码
      * @var string
      *
-     * @ORM\Column(name="zip_code", type="string", length=20)
+     * @ORM\Column(name="zip_code", type="string", length=20, nullable=true)
      */
     protected $zipCode;
 
@@ -84,7 +86,7 @@ class Company
      * 电话
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=30)
+     * @ORM\Column(name="phone", type="string", length=30, nullable=true)
      */
     protected $phone;
 
@@ -92,7 +94,7 @@ class Company
      * 传真
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=30)
+     * @ORM\Column(name="fax", type="string", length=30, nullable=true)
      */
     protected $fax;
 
@@ -100,7 +102,7 @@ class Company
      * 网站
      * @var string
      *
-     * @ORM\Column(name="website", type="string", length=60)
+     * @ORM\Column(name="website", type="string", length=60, nullable=true)
      */
     protected $website;
 
@@ -108,7 +110,7 @@ class Company
      * 邮箱
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=255)
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
      */
     protected $mail;
 
@@ -116,7 +118,7 @@ class Company
      * 办公地址
      * @var string
      *
-     * @ORM\Column(name="office_address", type="string", length=255)
+     * @ORM\Column(name="office_address", type="string", length=255, nullable=true)
      */
     protected $officeAddress;
 
@@ -124,7 +126,7 @@ class Company
      * 描述
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
+     * @ORM\Column(name="description", type="text", nullable=true, nullable=true)
      */
     protected $description;
 
@@ -577,11 +579,11 @@ class Company
     /**
      * Set type
      *
-     * @param \Sunshine\AdminBundle\Entity\Choice $type
+     * @param \Sunshine\AdminBundle\Entity\Options $type
      *
      * @return Company
      */
-    public function setType(\Sunshine\AdminBundle\Entity\Choice $type = null)
+    public function setType(\Sunshine\AdminBundle\Entity\Options $type = null)
     {
         $this->type = $type;
 
@@ -591,7 +593,7 @@ class Company
     /**
      * Get type
      *
-     * @return \Sunshine\AdminBundle\Entity\Choice
+     * @return \Sunshine\AdminBundle\Entity\Options
      */
     public function getType()
     {

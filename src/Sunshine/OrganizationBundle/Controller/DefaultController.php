@@ -14,7 +14,7 @@ class DefaultController extends Controller
     protected $em;
 
     /**
-     * @Route("/admin/org/", name="admin_org_front")
+     * @Route("/admin/org/organization", name="admin_org_front")
      */
     public function indexAction()
     {

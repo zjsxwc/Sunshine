@@ -13,6 +13,7 @@ sunshine:
         workScope: 工作范围控制
         logo: 单位标识配置
     form:
+        createSubmit: 创建提交
         editSubmit: 编辑提交
     organization:
         form:
@@ -27,8 +28,12 @@ sunshine:
                 fax: 传真
                 website: 网站
                 mail: 电子邮箱
-                officeAddress: 邮件地址
+                officeAddress: 物流地址
                 description: 组织描述
                 admin: 管理员登录名
                 type: 组织类型
                 chooseOne: 选取一个
+            company:
+                name: 单位/公司名称
+                alias: 单位简称
+                owner: 所属组织名称

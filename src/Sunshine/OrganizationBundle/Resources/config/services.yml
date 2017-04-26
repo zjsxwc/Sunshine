@@ -1,4 +1,6 @@
 services:
-#    sunshine_organization.example:
-#        class: Sunshine\OrganizationBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    sunshine.companytype.translator:
+        class: Sunshine\OrganizationBundle\Form\CompanyType
+        arguments: ['@translator']
+        tags:
+            - { name: form.type, alias: sunshine_company_type_translator}

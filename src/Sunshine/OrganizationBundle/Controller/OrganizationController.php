@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Organization controller.
  *
- * @Route("admin/org")
+ * @Route("admin/org/organization")
  */
 class OrganizationController extends Controller
 {
