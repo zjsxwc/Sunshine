@@ -3,12 +3,16 @@
 namespace Sunshine\OrganizationBundle\Controller;
 
 use Sunshine\OrganizationBundle\Entity\BusinessUnit;
+use Sunshine\OrganizationBundle\Entity\Company;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Businessunit controller.
+ * BusinessUnit controller.
  *
  * @Route("admin/org/bu")
  */
@@ -24,10 +28,14 @@ class BusinessUnitController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $businessUnits = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findAll();
-
-        return $this->render('businessunit/index.html.twig', array(
-            'businessUnits' => $businessUnits,
+        $defaultCompany = $em->getRepository('SunshineOrganizationBundle:Company')->findOneBy([], ['orderNumber'=>'ASC']);
+        $company = $em->getRepository('SunshineOrganizationBundle:Company')->findAll();
+        $businessUnits = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findBy(['company'=>$defaultCompany]);
+        dump($businessUnits);
+        return $this->render('@SunshineOrganization/businessunit/index.html.twig', array(
+            'company' => $company,
+            'defaultCompany' => $defaultCompany,
+            'businessUnits' => $businessUnits
         ));
     }
 
@@ -41,6 +49,7 @@ class BusinessUnitController extends Controller
     {
         $businessUnit = new Businessunit();
         $form = $this->createForm('Sunshine\OrganizationBundle\Form\BusinessUnitType', $businessUnit);
+        $request->get('company');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +60,7 @@ class BusinessUnitController extends Controller
             return $this->redirectToRoute('admin_org_bu_show', array('id' => $businessUnit->getId()));
         }
 
-        return $this->render('businessunit/new.html.twig', array(
+        return $this->render('@SunshineOrganization/businessunit/new.html.twig', array(
             'businessUnit' => $businessUnit,
             'form' => $form->createView(),
         ));
@@ -67,7 +76,7 @@ class BusinessUnitController extends Controller
     {
         $deleteForm = $this->createDeleteForm($businessUnit);
 
-        return $this->render('businessunit/show.html.twig', array(
+        return $this->render('@SunshineOrganization/businessunit/show.html.twig', array(
             'businessUnit' => $businessUnit,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +100,7 @@ class BusinessUnitController extends Controller
             return $this->redirectToRoute('admin_org_bu_edit', array('id' => $businessUnit->getId()));
         }
 
-        return $this->render('businessunit/edit.html.twig', array(
+        return $this->render('@SunshineOrganization/businessunit/edit.html.twig', array(
             'businessUnit' => $businessUnit,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -116,6 +125,40 @@ class BusinessUnitController extends Controller
         }
 
         return $this->redirectToRoute('admin_org_bu_index');
+    }
+
+    /**
+     * 获取部门的树状 json
+     *
+     * @param Request $request
+     *
+     * @Route("/tree/{name}", name="admin_org_bu_tree_json")
+     * @Method("GET")
+     * @return Response
+     */
+    public function getBusinessTreeJson(Request $request)
+    {
+        $companyName = $request->get('name');
+        $em = $this->getDoctrine()->getManager();
+        $bu = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findByCompanyName($companyName);
+        $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->setChildrenIndex('children');
+        $trees = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->childrenHierarchy(
+            null,
+            false
+        );
+
+        $company = [['id'=>1, 'text'=>$companyName]];
+        if (null  !== $trees) {
+            $trees = array_map(function($tree) {
+                return array(
+                    'id' => $tree['id'],
+                    'text' => $tree['name']
+                );
+            }, $trees);
+            $company[0]['children'] = $trees;
+        }
+
+        return new JsonResponse($company);
     }
 
     /**

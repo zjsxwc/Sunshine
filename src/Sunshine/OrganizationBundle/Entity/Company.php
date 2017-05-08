@@ -34,6 +34,22 @@ class Company
     protected $name;
 
     /**
+     * 公司代码
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=10, nullable=true)
+     */
+    protected $code;
+
+    /**
+     * 排序号
+     * @var int
+     *
+     * @ORM\Column(name="order_number", type="integer", options={"unsigned"=true}, nullable=true)
+     */
+    protected $orderNumber;
+
+    /**
      * 外文名称
      * @var string
      *
@@ -195,6 +211,11 @@ class Company
     public function beforeUpdate()
     {
         $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getName();
     }
 
     /**
@@ -690,5 +711,53 @@ class Company
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Company
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set orderNumber
+     *
+     * @param integer $orderNumber
+     *
+     * @return Company
+     */
+    public function setOrderNumber($orderNumber)
+    {
+        $this->orderNumber = $orderNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get orderNumber
+     *
+     * @return integer
+     */
+    public function getOrderNumber()
+    {
+        return $this->orderNumber;
     }
 }

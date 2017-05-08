@@ -4,3 +4,15 @@ services:
         arguments: ['@translator']
         tags:
             - { name: form.type, alias: sunshine_company_type_translator}
+
+    sunshine.type.company_name_hidden:
+        class: Sunshine\OrganizationBundle\Form\CompanyNameHiddenType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }
+
+    sunshine.type.business_unit_parent_hidden:
+        class: Sunshine\OrganizationBundle\Form\BusinessUnitParentHiddenType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }

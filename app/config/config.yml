@@ -36,6 +36,8 @@ framework:
                 base_path: /bundles/sunshineui/
             lte:
                 base_path: /bundles/sunshineui/AdminLTE/
+            easyui:
+                base_path: /bundles/sunshineui/jquery-easyui
             css:
                 base_path: /bundles/sunshineui/css/
             js:
@@ -71,8 +73,17 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+                mappings:
+                    gedmo_tree:
+                        type: annotation
+                        alias: GedmoTree
+                        prefix: Gedmo\Tree\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                        is_bundle: false
 
 # Swiftmailer Configuration
 swiftmailer:

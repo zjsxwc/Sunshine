@@ -37,3 +37,16 @@ sunshine:
                 name: 单位/公司名称
                 alias: 单位简称
                 owner: 所属组织名称
+            bu:
+                name: 部门名称
+                code: 部门代码
+                orderNumber: 排序号
+                enabled: 启用
+                createSpace: 创建部门空间
+                manager: 部门主管
+                preManager: 部门分管领导
+                businessUnitAdmin: 部门管理员
+                documentReceiver: 部门公文收发员
+                description: 描述
+                invalidCompany: 这不是正确的公司名称
+                invalidBusinessUnit: 这不是正确的部门名称

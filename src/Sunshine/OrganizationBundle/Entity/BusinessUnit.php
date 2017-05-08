@@ -69,7 +69,7 @@ class BusinessUnit implements GedmoNode
      * 是否创建部门空间
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $createSpace;
 
@@ -144,7 +144,7 @@ class BusinessUnit implements GedmoNode
      * @var Company
      *
      * @ORM\ManyToOne(targetEntity="Sunshine\OrganizationBundle\Entity\Company", inversedBy="businessUnit")
-     * @ORM\JoinColumn(name="", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected $company;
 

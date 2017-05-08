@@ -7,6 +7,10 @@ Sunshine 项目概述
 
 1. Symfony 3 基础框架 (目前是3.2.7)
 2. 前端UI
+    * AdminLTE 模板 (Bootstrap)
+    * jQuery UI Layout Plug-in
+        * http://layout.jquery-dev.com/index.cfm
+        * 用于将某个区域设置为上、下、左、右、中间这种结构的、可隐藏四周的布局。
 3. 三方 Bundle
   - gedmo/doctrine-extensions (目前使用其中的tree)
     https://github.com/Atlantic18/DoctrineExtensions
@@ -20,8 +24,8 @@ Sunshine 项目概述
 1. OrganizationBundle 组织、公司、部门、用户等组织机构相关信息功能的包。
 * 组织的概念类似企业集团，能以组织为最大单位划分功能区域，彻底阻隔资源的互相访问。
 * 公司(Company)，这是组织一级下边的独立运营性质的公司实体。
-* 部门以商业单元来区分(BusinessUnit)，它是一个树状的组织形式，可以包含公司、下属子公司、
-系统、子系统、事业部、部门、子部门等概念。
+* 部门以商业单元来区分(BusinessUnit)，它是一个树状的组织形式，可以系统、子系统、事业部、
+  部门、子部门等概念。
 * 用户(User)，这是整个OA系统的最小组织单位，也是最终的实际的用户实体。
 * 岗位(Title)，这是用户的岗位、职务名称。
 * 职务级别(ServiceGrade)，这是用户的职务级别，比如总裁、副总裁、总监、部门经理、主管、员工
@@ -85,3 +89,9 @@ Sunshine 项目概述
         * 网站
         * 邮件地址
      * 右侧, 单位描述(text)
+     
+### 可能的坑
+
+1. 一些翻译是不能修改的
+    * 'sunshine.organization.form.org.type':'组织类型'  这个翻译会存储为 Options 的 name，
+      会在一些选项里通过此翻译进行数据库查询，所以一旦初始化，不能修改此翻译。

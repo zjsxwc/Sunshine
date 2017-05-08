@@ -1,8 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends "@SunshineOrganization/businessunit/businessUnit.html.twig" %}
 
-{% block body %}
-    <h1>Businessunit edit</h1>
-
+{% block main_content %}
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />

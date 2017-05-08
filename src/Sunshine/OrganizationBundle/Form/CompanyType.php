@@ -17,6 +17,10 @@ class CompanyType extends AbstractType
      * @var TranslatorInterface
      */
     protected $translator;
+
+    /**
+     * @var Translation for Organization Type
+     */
     protected $translation;
 
     /**
