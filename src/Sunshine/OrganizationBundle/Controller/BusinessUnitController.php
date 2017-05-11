@@ -31,7 +31,6 @@ class BusinessUnitController extends Controller
         $defaultCompany = $em->getRepository('SunshineOrganizationBundle:Company')->findOneBy([], ['orderNumber'=>'ASC']);
         $company = $em->getRepository('SunshineOrganizationBundle:Company')->findAll();
         $businessUnits = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findBy(['company'=>$defaultCompany]);
-        dump($businessUnits);
         return $this->render('@SunshineOrganization/businessunit/index.html.twig', array(
             'company' => $company,
             'defaultCompany' => $defaultCompany,
@@ -152,13 +151,27 @@ class BusinessUnitController extends Controller
             $trees = array_map(function($tree) {
                 return array(
                     'id' => $tree['id'],
-                    'text' => $tree['name']
+                    'text' => $tree['name'],
+                    'children' => $tree['children']
                 );
             }, $trees);
+
             $company[0]['children'] = $trees;
         }
 
-        return new JsonResponse($company);
+        $json = json_encode($company);
+        /**
+         * That's really dirty implementation T_T
+         * I must change the output array of childrenHierarchy to fit for the Tree UI library (EasyUI),
+         * The UI library use text for the tree node label, but I did not find a way to define the output of
+         * childrenHierarchy method to specific array key name. And also I can't change the array key after
+         * the output, I try array_map, but it's not work for multidimensional array, and array_walk_recursive
+         * can change the value of the specific key which is "name", but it can't change the key itself :(
+         *
+         * If you got better solution, just tell me, thank you.
+         */
+        $jsonResult  = str_replace('name', 'text', $json);
+        return new Response($jsonResult);
     }
 
     /**
@@ -176,4 +189,22 @@ class BusinessUnitController extends Controller
             ->getForm()
         ;
     }
+
+    private function array_map_recursive(callable $callback, array $array) {
+        return filter_var($array, \FILTER_CALLBACK, ['options' => $callback]);
+    }
+
+
+    /**
+    private function replaceName($trees) {
+        $result = array_map(function($tree) {
+            return array(
+                'id' => $tree['id'],
+                'text' => $tree['name'],
+                'children' => $tree['children']
+            );
+        }, $trees);
+
+        return $result;
+    } **/
 }

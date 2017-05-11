@@ -50,3 +50,4 @@ sunshine:
                 description: 描述
                 invalidCompany: 这不是正确的公司名称
                 invalidBusinessUnit: 这不是正确的部门名称
+                nameExist: 此公司已经存在此部门名称。

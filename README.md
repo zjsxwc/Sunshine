@@ -8,9 +8,9 @@ Sunshine 项目概述
 1. Symfony 3 基础框架 (目前是3.2.7)
 2. 前端UI
     * AdminLTE 模板 (Bootstrap)
-    * jQuery UI Layout Plug-in
-        * http://layout.jquery-dev.com/index.cfm
-        * 用于将某个区域设置为上、下、左、右、中间这种结构的、可隐藏四周的布局。
+    * jQuery EasyUI
+        * https://www.jeasyui.com/
+        * 用EasyUI的组件作为对 AdminLTE 的补充
 3. 三方 Bundle
   - gedmo/doctrine-extensions (目前使用其中的tree)
     https://github.com/Atlantic18/DoctrineExtensions
@@ -95,3 +95,8 @@ Sunshine 项目概述
 1. 一些翻译是不能修改的
     * 'sunshine.organization.form.org.type':'组织类型'  这个翻译会存储为 Options 的 name，
       会在一些选项里通过此翻译进行数据库查询，所以一旦初始化，不能修改此翻译。
+2. 不能重复的地方
+    * 部门名称。
+        ** 同一公司不能有重复的部门名称，这将作为组织管理里对部门管理的强制要求，
+           但不同公司间的部门名称可以重复。
+        ** 切忌使用一下名称命名部门名称，否则会产生意外的问题: "部门", "name"

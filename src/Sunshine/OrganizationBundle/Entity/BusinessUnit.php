@@ -3,6 +3,7 @@
 namespace Sunshine\OrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Tree\Node as GedmoNode;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,6 +19,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  *         @ORM\Index(name="idx_business_unit_enabled", columns={"enabled"})
  *     })
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\BusinessUnitRepository")
+ * @UniqueEntity(
+ *     fields={"company", "name"},
+ *     errorPath="name",
+ *     message="sunshine.organization.form.bu.nameExist"
+ * )
  * @Gedmo\Tree(type="nested")
  * @ORM\HasLifecycleCallbacks()
  */
