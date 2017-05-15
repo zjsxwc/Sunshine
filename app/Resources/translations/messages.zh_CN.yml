@@ -1,4 +1,10 @@
 sunshine:
+    label:
+        create: 新建
+        modify: 修改
+        delete: 删除
+        close: 关闭
+        cancal: 取消
     menu:
         label: 菜单
         organization: 组织架构管理
@@ -51,3 +57,10 @@ sunshine:
                 invalidCompany: 这不是正确的公司名称
                 invalidBusinessUnit: 这不是正确的部门名称
                 nameExist: 此公司已经存在此部门名称。
+        warning:
+            bu:
+                notApprovedDelete: 无法删除此部门
+                notApprovedContent1: 此部门下有子部门或用户，不满足删除条件。
+                notApprovedContent2: 请将子部门转移或删除，再将用户转移到其他部门再尝试删除此部门。
+                deleteAialog: 删除此部门
+                deleteContent: "此部门将被删除，你确定要执行这个操作吗？删除部门 :"

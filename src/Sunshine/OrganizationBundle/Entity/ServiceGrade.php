@@ -3,6 +3,8 @@
 namespace Sunshine\OrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
 /**
  * ServiceGrade
@@ -10,9 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="sunshine_organization_service_grade", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\ServiceGradeRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class ServiceGrade
 {
+    /**
+     * 挂载软删除能力
+     * 增加 deletedAt 字段
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @var int
      *

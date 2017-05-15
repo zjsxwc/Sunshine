@@ -56,7 +56,7 @@ class BusinessUnitController extends Controller
             $em->persist($businessUnit);
             $em->flush();
 
-            return $this->redirectToRoute('admin_org_bu_show', array('id' => $businessUnit->getId()));
+            return $this->redirectToRoute('admin_org_bu_index');
         }
 
         return $this->render('@SunshineOrganization/businessunit/new.html.twig', array(
@@ -66,25 +66,9 @@ class BusinessUnitController extends Controller
     }
 
     /**
-     * Finds and displays a businessUnit entity.
-     *
-     * @Route("/{id}", name="admin_org_bu_show")
-     * @Method("GET")
-     */
-    public function showAction(BusinessUnit $businessUnit)
-    {
-        $deleteForm = $this->createDeleteForm($businessUnit);
-
-        return $this->render('@SunshineOrganization/businessunit/show.html.twig', array(
-            'businessUnit' => $businessUnit,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing businessUnit entity.
      *
-     * @Route("/{id}/edit", name="admin_org_bu_edit")
+     * @Route("/{name}/edit", name="admin_org_bu_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, BusinessUnit $businessUnit)
@@ -96,7 +80,7 @@ class BusinessUnitController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_org_bu_edit', array('id' => $businessUnit->getId()));
+            return $this->redirectToRoute('admin_org_bu_index');
         }
 
         return $this->render('@SunshineOrganization/businessunit/edit.html.twig', array(
@@ -109,21 +93,57 @@ class BusinessUnitController extends Controller
     /**
      * Deletes a businessUnit entity.
      *
-     * @Route("/{id}", name="admin_org_bu_delete")
-     * @Method("DELETE")
+     * @Route("/delete/", name="admin_org_bu_delete")
+     * @Method({"POST"})
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function deleteAction(Request $request, BusinessUnit $businessUnit)
+    public function deleteAction(Request $request)
     {
-        $form = $this->createDeleteForm($businessUnit);
-        $form->handleRequest($request);
+        $companyName = $request->get('name');
+        $em = $this->getDoctrine()->getManager();
+        $bu = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findOneBy(["name" => $companyName]);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($businessUnit);
-            $em->flush();
+        if (!$bu) {
+            $resultArr = array('deleted'=>0);
+            return new JsonResponse($resultArr);
         }
 
-        return $this->redirectToRoute('admin_org_bu_index');
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($bu);
+        $em->flush();
+
+        $resultArr = array('deleted'=>1);
+        return new JsonResponse($resultArr);
+    }
+
+    /**
+     * 检查是否满足删除此部门的条件
+     *
+     * @Route("/check/", name="admin_org_bu_check")
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkAction(Request $request)
+    {
+        $companyName = $request->get('name');
+        $em = $this->getDoctrine()->getManager();
+        $bu = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findOneBy(["name" => $companyName]);
+        $hasChildren = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->childCount($bu);
+        $hasUser = $em->getRepository('SunshineOrganizationBundle:User')->findOneBy(['businessUnit' => $bu]);
+
+        /**
+         * 如果此部门有子部门或此部门下有用户就不能删除这个部门。
+         * approved 为假不能删除，为真可以删除
+         */
+        $resultArr = array('approved'=>0);
+
+        if (!$hasChildren && !$hasUser) {
+            $resultArr = array('approved'=>1);
+        }
+
+        return new JsonResponse($resultArr);
     }
 
     /**
@@ -184,27 +204,9 @@ class BusinessUnitController extends Controller
     private function createDeleteForm(BusinessUnit $businessUnit)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_org_bu_delete', array('id' => $businessUnit->getId())))
+            ->setAction($this->generateUrl('admin_org_bu_delete', array('name' => $businessUnit->getName())))
             ->setMethod('DELETE')
             ->getForm()
         ;
     }
-
-    private function array_map_recursive(callable $callback, array $array) {
-        return filter_var($array, \FILTER_CALLBACK, ['options' => $callback]);
-    }
-
-
-    /**
-    private function replaceName($trees) {
-        $result = array_map(function($tree) {
-            return array(
-                'id' => $tree['id'],
-                'text' => $tree['name'],
-                'children' => $tree['children']
-            );
-        }, $trees);
-
-        return $result;
-    } **/
 }

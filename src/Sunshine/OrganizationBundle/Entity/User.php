@@ -10,6 +10,8 @@ use Sunshine\AdminBundle\Entity\Choice;
 use Symfony\Component\Validator\Constraints as Assert;
 use Sunshine\OrganizationBundle\Entity\BusinessUnit;
 use Sunshine\OrganizationBundle\Entity\Organization;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
 /**
  * User
@@ -17,9 +19,16 @@ use Sunshine\OrganizationBundle\Entity\Organization;
  * @ORM\Table(name="sunshine_organization_user", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class User implements AdvancedUserInterface, \Serializable
 {
+    /**
+     * 挂载软删除能力
+     * 增加 deletedAt 字段
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @var int
      *

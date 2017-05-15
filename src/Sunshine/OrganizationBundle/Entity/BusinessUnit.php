@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Tree\Node as GedmoNode;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -25,10 +26,17 @@ use Doctrine\Common\Collections\ArrayCollection;
  *     message="sunshine.organization.form.bu.nameExist"
  * )
  * @Gedmo\Tree(type="nested")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @ORM\HasLifecycleCallbacks()
  */
 class BusinessUnit implements GedmoNode
 {
+    /**
+     * 挂载软删除能力
+     * 增加 deletedAt 字段
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @var int
      *

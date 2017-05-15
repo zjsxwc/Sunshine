@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Sunshine\AdminBundle\Entity\Choice;
 use Sunshine\AdminBundle\Entity\Options;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
 /**
  * Company
@@ -13,9 +15,17 @@ use Sunshine\AdminBundle\Entity\Options;
  * @ORM\Table(name="sunshine_organization_company", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\CompanyRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Company
 {
+
+    /**
+     * 挂载软删除能力
+     * 增加 deletedAt 字段
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @var int
      *

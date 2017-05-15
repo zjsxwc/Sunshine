@@ -15,6 +15,9 @@
             $("#sunshine_organizationbundle_businessunit_company").val(companyName);
             var node = $('#bu').tree('getSelected');
             var parentText = $('#bu').tree('getParent', node.target).text;
-            $("#sunshine_organizationbundle_businessunit_parent").val(parentText);
+
+            if (companyName !== parentText) {
+                $("#sunshine_organizationbundle_businessunit_parent").val(parentText);
+            }
         })
     </script>

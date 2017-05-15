@@ -4,6 +4,8 @@ namespace Sunshine\OrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sunshine\AdminBundle\Entity\Choice;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
 /**
  * WorkGroup
@@ -11,9 +13,16 @@ use Sunshine\AdminBundle\Entity\Choice;
  * @ORM\Table(name="sunshine_organization_work_group", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
  * @ORM\Entity(repositoryClass="Sunshine\OrganizationBundle\Repository\WorkGroupRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class WorkGroup
 {
+    /**
+     * 挂载软删除能力
+     * 增加 deletedAt 字段
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @var int
      *
