@@ -5,6 +5,10 @@ sunshine:
         delete: 删除
         close: 关闭
         cancal: 取消
+        import: 批量导入
+        importFromExcel: 导入Excel
+        downloadTemplate: Excel模板下载
+        export: 导出
     menu:
         label: 菜单
         organization: 组织架构管理
@@ -57,6 +61,13 @@ sunshine:
                 invalidCompany: 这不是正确的公司名称
                 invalidBusinessUnit: 这不是正确的部门名称
                 nameExist: 此公司已经存在此部门名称。
+            title:
+                name: 岗位名称
+                code: 岗位代码
+                type: 岗位类别
+                orderNumber: 排序号
+                enabled: 状态
+                description: 描述
         warning:
             bu:
                 notApprovedDelete: 无法删除此部门

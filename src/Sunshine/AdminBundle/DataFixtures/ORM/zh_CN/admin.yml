@@ -7,8 +7,12 @@ Sunshine\AdminBundle\Entity\Admin:
 Sunshine\AdminBundle\Entity\Choice:
     organization_type:
         name: 组织类型
+    title_type:
+        name: 岗位类别
 
+## 系统选项
 Sunshine\AdminBundle\Entity\Options:
+## 组织类型
     org_type_gy:
         displayName: 国有企业
         value: 1
@@ -73,3 +77,28 @@ Sunshine\AdminBundle\Entity\Options:
         enabled: true
         enabledSearch: true
         type: 1
+## 岗位类别
+    title_type_management:
+        displayName: 管理类
+        value: 1
+        source: '@title_type'
+        orderNumber: 1
+        enabled: true
+        enabledSearch: true
+        type: 2
+    title_type_functional:
+        displayName: 职能类
+        value: 2
+        source: '@title_type'
+        orderNumber: 2
+        enabled: true
+        enabledSearch: true
+        type: 2
+    title_type_technical:
+        displayName: 技术类
+        value: 3
+        source: '@title_type'
+        orderNumber: 3
+        enabled: true
+        enabledSearch: true
+        type: 2

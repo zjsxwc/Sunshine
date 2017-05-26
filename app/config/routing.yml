@@ -1,3 +1,7 @@
+sunshine_organization_title:
+    resource: "@SunshineOrganizationBundle/Controller/TitleController.php"
+    type:     annotation
+
 sunshine_organization_business_unit:
     resource: "@SunshineOrganizationBundle/Controller/BusinessUnitController.php"
     type:     annotation

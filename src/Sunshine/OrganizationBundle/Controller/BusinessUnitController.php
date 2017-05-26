@@ -29,6 +29,7 @@ class BusinessUnitController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $defaultCompany = $em->getRepository('SunshineOrganizationBundle:Company')->findOneBy([], ['orderNumber'=>'ASC']);
+        $defaultCompany ? $defaultCompany : $defaultCompany = 'nothing';
         $company = $em->getRepository('SunshineOrganizationBundle:Company')->findAll();
         $businessUnits = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findBy(['company'=>$defaultCompany]);
         return $this->render('@SunshineOrganization/businessunit/index.html.twig', array(

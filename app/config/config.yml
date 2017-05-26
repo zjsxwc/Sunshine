@@ -36,6 +36,8 @@ framework:
                 base_path: /bundles/sunshineui/
             lte:
                 base_path: /bundles/sunshineui/AdminLTE/
+            ltePlugin:
+                base_path: /bundles/sunshineui/AdminLTE/plugins/
             easyui:
                 base_path: /bundles/sunshineui/jquery-easyui
             css:

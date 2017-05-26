@@ -44,16 +44,16 @@ class Title
      * 岗位代码
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=20)
+     * @ORM\Column(name="code", type="string", length=20, nullable=true)
      */
     protected $code;
 
     /**
      * 岗位类型
-     * @var Choice
+     * @var Options
      *
-     * @ORM\OneToOne(targetEntity="Sunshine\AdminBundle\Entity\Choice")
-     * @ORM\JoinColumn(name="title_type_choice_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Sunshine\AdminBundle\Entity\Options")
+     * @ORM\JoinColumn(name="title_type_options_id", referencedColumnName="id", nullable=true)
      */
     protected $type;
 
@@ -112,6 +112,27 @@ class Title
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
+
+    /**
+     * Pre persist event listener
+     *
+     * @ORM\PrePersist
+     */
+    public function beforeSave()
+    {
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    /**
+     * Pre update event listener
+     *
+     * @ORM\PreUpdate
+     */
+    public function beforeUpdate()
+    {
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
 
     /**
     ┌─────────────────────────────────────────────────────────────────────┐
@@ -327,11 +348,11 @@ class Title
     /**
      * Set type
      *
-     * @param \Sunshine\AdminBundle\Entity\Choice $type
+     * @param \Sunshine\AdminBundle\Entity\Options $type
      *
      * @return Title
      */
-    public function setType(\Sunshine\AdminBundle\Entity\Choice $type = null)
+    public function setType(\Sunshine\AdminBundle\Entity\Options $type = null)
     {
         $this->type = $type;
 
@@ -341,7 +362,7 @@ class Title
     /**
      * Get type
      *
-     * @return \Sunshine\AdminBundle\Entity\Choice
+     * @return \Sunshine\AdminBundle\Entity\Options
      */
     public function getType()
     {
