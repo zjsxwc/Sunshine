@@ -21,7 +21,7 @@ class DefaultController extends Controller
         $this->em = $this->getDoctrine()->getManager();
         $org = $this->em->getRepository("SunshineOrganizationBundle:Organization")->find(1);
         if ($org !== null) {
-            return $this->forward('SunshineOrganizationBundle:Organization:show', ['organization' => $org]);
+            return $this->forward('SunshineOrganizationBundle:Organization:edit', ['organization' => $org]);
         }
 
         $response = $this->forward('SunshineOrganizationBundle:Organization:new');
