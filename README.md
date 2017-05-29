@@ -46,7 +46,7 @@ Sunshine 项目概述
 
 表单构建器概念图
 
-
+![ApplicationBuilderConception](https://raw.githubusercontent.com/TonyGao/Sunshine/master/app/Resources/Documentation/images/%E8%A1%A8%E5%8D%95%E8%A7%86%E5%9B%BE%E8%AE%BE%E8%AE%A1.png)
 
 3. UIBundle 用户界面相关的包。
 * 本项目将使用 AdminLTE 模板作为 UI 库。
