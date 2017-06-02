@@ -28,6 +28,8 @@
 
 <!-- 底部的JavaScript -->
 {% block bottom_script %}
+    <!-- SPF 2.4.0 -->
+    <script src="{{ asset('spf.js', 'js') }}"></script>
     <!-- jQuery 2.2.3 -->
     <script src="{{ asset('plugins/jQuery/jquery-2.2.3.min.js', 'lte') }}"></script>
     <!-- Bootstrap 3.3.6 -->
@@ -37,6 +39,9 @@
 {% endblock %}
 
 {% block javascript %}
+    <script>
+        spf.init();
+    </script>
 {% endblock %}
 </body>
 </html>
