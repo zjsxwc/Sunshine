@@ -9,7 +9,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 /**
  * Bundle
  *
- * @ORM\Table(name="bundle")
+ * @ORM\Table(name="sunshine_ui_bundle")
  * @ORM\Entity(repositoryClass="Sunshine\UIBundle\Repository\BundleRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)

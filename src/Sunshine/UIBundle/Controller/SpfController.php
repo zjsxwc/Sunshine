@@ -10,7 +10,7 @@ abstract class SpfController extends Controller
     protected $template;
     protected $params;
 
-    protected function spfRender($template, $twig, $params=[])
+    protected function spfRender($template, $params=[])
     {
         $requestStack = $this->get('request_stack');
         $request = $requestStack->getCurrentRequest();
@@ -18,14 +18,14 @@ abstract class SpfController extends Controller
         $this->params = $params ? $params : [];
 
         $spf = $request->query->get('spf', '');
-        if ($spf === 'navigate' && $twig) {
-            $data = $this->getNavigateData($twig);
+        if ($spf === 'navigate' && $template) {
+            $data = $this->getNavigateData($template);
             return new JsonResponse($data);
         }
         return $this->render($template, $params);
     }
 
-    protected function getNavigateData(Twig $twig)
+    protected function getNavigateData($template)
     {
         $data = [];
         $blocks  = $twig->getBlock();

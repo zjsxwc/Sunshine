@@ -9,7 +9,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 /**
  * Block
  *
- * @ORM\Table(name="block")
+ * @ORM\Table(name="sunshine_ui_block")
  * @ORM\Entity(repositoryClass="Sunshine\UIBundle\Repository\BlockRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
@@ -49,7 +49,7 @@ class Block
     /**
      * @var bool
      *
-     * @ORM\Column(name="spf_state", type="boolean")
+     * @ORM\Column(name="spf_state", type="boolean", nullable=true)
      */
     protected $spfState;
 

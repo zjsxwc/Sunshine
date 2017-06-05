@@ -9,7 +9,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 /**
  * Twig
  *
- * @ORM\Table(name="twig")
+ * @ORM\Table(name="sunshine_ui_twig")
  * @ORM\Entity(repositoryClass="Sunshine\UIBundle\Repository\TwigRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
@@ -76,6 +76,8 @@ class Twig
     protected $updatedAt;
 
     /**
+     * Html Head Title
+     *
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
@@ -85,7 +87,7 @@ class Twig
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $spfHead;
 

@@ -48,8 +48,11 @@ class ListBundlesCommand extends ContainerAwareCommand
                 $twigs = Finder::create()->files()->in($dir)->name('*.twig');
                 $output->writeln("Twig 数量: ".$twigs->count());
                 foreach ($twigs->sortByName() as $file) {
+                    $output->writeln("Twig 名称: ".$file->getFilename());
+
                     $twigFile = $file->getRealPath();
                     $output->writeln("Twig 文件: ".$twigFile);
+
                     $twig = $this->getContainer()->get('twig');
                     $template = $twig->loadTemplate($twigFile);
                     $output->writeln("包含的 Block: ");
