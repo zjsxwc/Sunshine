@@ -55,8 +55,19 @@ class ListBundlesCommand extends ContainerAwareCommand
 
                     $twig = $this->getContainer()->get('twig');
                     $template = $twig->loadTemplate($twigFile);
+                    dump('Template name: '.$template->getTemplateName());
+                    
                     $output->writeln("包含的 Block: ");
                     dump($template->getBlockNames());
+
+                    $twigShortName = "SunshineUIBundle::base.html.twig";
+                    //$twigShortName = "SunshineUIBundle::base.html.twig";
+                    //$name  = $this->getContainer()->get('kernel')->locateResource($twigShortName);
+                    $rootDir = str_replace('app', '', $this->getContainer()->get('kernel')->getRootDir());
+                    $path = $twig->getLoader()->getCacheKey($twigShortName);
+                    dump($rootDir.$path);
+                    //dump($this->getContainer()->get('file_locator')->locate($name));
+
                     $output->writeln('');
                 }
                 $output->writeln('---------------------------------');

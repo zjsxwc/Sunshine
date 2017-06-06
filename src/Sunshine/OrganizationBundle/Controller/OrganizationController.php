@@ -7,13 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sunshine\UIBundle\Controller\SpfController;
 
 /**
  * Organization controller.
  *
  * @Route("admin/org/organization")
  */
-class OrganizationController extends Controller
+class OrganizationController extends SpfController
 {
     /**
      * Lists all organization entities.
@@ -88,11 +89,10 @@ class OrganizationController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('admin_org_edit', array('id' => $organization->getId()));
         }
 
-        return $this->render('@SunshineOrganization/organization/edit.html.twig', array(
+        return $this->spfRender('@SunshineOrganization/organization/edit.html.twig', array(
             'organization' => $organization,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

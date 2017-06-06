@@ -10,4 +10,20 @@ namespace Sunshine\UIBundle\Repository;
  */
 class BlockRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param String $templateUniqueId
+     * @return array
+     */
+    public function findByTemplate($templateUniqueId)
+    {
+        $qb = $this->createQueryBuilder('block')
+            ->select('block')
+            ->join('block.twig', 'twig')
+            ->andWhere('block.spfState = true')
+            ->andWhere('twig.uniqueId = :uniqueId')
+            ->setParameter('uniqueId', $templateUniqueId)
+            ->getQuery()->getResult();
+
+        return $qb;
+    }
 }

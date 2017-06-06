@@ -73,6 +73,7 @@ class SunshineImportTemplatesCommand extends ContainerAwareCommand
             $bundle = new Bundle();
             $bundle->setName($bundleName)
                 ->setBundleRealPath($dir)
+                ->setUniqueId(crc32($dir))
                 ->setTwigAmount($twigs->count());
             $this->em->persist($bundle);
 
@@ -88,8 +89,10 @@ class SunshineImportTemplatesCommand extends ContainerAwareCommand
                 }
 
                 $twig = new Twig();
+                $twigPath = $file->getRealPath();
                 $twig->setName($file->getFileName())
-                    ->setFileRealPath($file->getRelativePath())
+                    ->setFileRealPath($twigPath)
+                    ->setUniqueId(crc32($twigPath))
                     ->setBundle($bundle);
                 $this->em->persist($twig);
 

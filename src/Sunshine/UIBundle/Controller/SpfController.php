@@ -4,11 +4,14 @@ namespace Sunshine\UIBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sunshine\UIBundle\Entity\Twig;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class SpfController extends Controller
 {
     protected $template;
     protected $params;
+    protected $em;
+    protected $twig;
 
     protected function spfRender($template, $params=[])
     {
@@ -27,12 +30,18 @@ abstract class SpfController extends Controller
 
     protected function getNavigateData($template)
     {
-        $data = [];
-        $blocks  = $twig->getBlock();
-        foreach ($blocks as $block) {
-            if (true === $block->getSpfState()) {
+        $this->twig = $this->get('twig');
+        $uniqueId = $this->getUniqueId($template);
+        $this->em = $this->get('doctrine')->getManager();
+        $blocks = $this->em->getRepository('SunshineUIBundle:Block')
+            ->findByTemplate($uniqueId);
+        dump($blocks);
+    }
 
-            }
-        }
+    protected function getUniqueId($template)
+    {
+        $rootDir = str_replace('app', '', $this->get('kernel')->getRootDir());
+        $path = $this->twig->getLoader()->getCacheKey(str_replace('@', '', $template));
+        return crc32($rootDir.$path);
     }
 }

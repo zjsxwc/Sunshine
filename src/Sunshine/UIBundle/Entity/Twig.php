@@ -32,6 +32,13 @@ class Twig
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="unique_id", type="integer", options={"unsigned"=true})
+     */
+    protected $uniqueId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -354,5 +361,29 @@ class Twig
     public function getSpfHead()
     {
         return $this->spfHead;
+    }
+
+    /**
+     * Set uniqueId
+     *
+     * @param integer $uniqueId
+     *
+     * @return Twig
+     */
+    public function setUniqueId($uniqueId)
+    {
+        $this->uniqueId = $uniqueId;
+
+        return $this;
+    }
+
+    /**
+     * Get uniqueId
+     *
+     * @return integer
+     */
+    public function getUniqueId()
+    {
+        return $this->uniqueId;
     }
 }

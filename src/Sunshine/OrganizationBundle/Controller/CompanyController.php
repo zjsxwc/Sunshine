@@ -3,16 +3,18 @@
 namespace Sunshine\OrganizationBundle\Controller;
 
 use Sunshine\OrganizationBundle\Entity\Company;
+use Sunshine\UIBundle\Controller\SpfController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Company controller.
  *
  * @Route("admin/org/company")
  */
-class CompanyController extends Controller
+class CompanyController extends SpfController
 {
     /**
      * Lists all company entities.
@@ -26,7 +28,7 @@ class CompanyController extends Controller
 
         $companies = $em->getRepository('SunshineOrganizationBundle:Company')->findAll();
 
-        return $this->render('@SunshineOrganization/company/index.html.twig', array(
+        return $this->spfRender('SunshineOrganizationBundle:company:index.html.twig', array(
             'companies' => $companies,
         ));
     }

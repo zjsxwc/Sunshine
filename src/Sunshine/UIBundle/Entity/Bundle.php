@@ -32,6 +32,13 @@ class Bundle
     protected $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="unique_id", type="integer", options={"unsigned"=true})
+     */
+    protected $uniqueId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -289,5 +296,29 @@ class Bundle
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set uniqueId
+     *
+     * @param integer $uniqueId
+     *
+     * @return Bundle
+     */
+    public function setUniqueId($uniqueId)
+    {
+        $this->uniqueId = $uniqueId;
+
+        return $this;
+    }
+
+    /**
+     * Get uniqueId
+     *
+     * @return integer
+     */
+    public function getUniqueId()
+    {
+        return $this->uniqueId;
     }
 }
