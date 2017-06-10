@@ -83,19 +83,17 @@ class OrganizationController extends SpfController
      */
     public function editAction(Request $request, Organization $organization)
     {
-        $deleteForm = $this->createDeleteForm($organization);
         $editForm = $this->createForm('Sunshine\OrganizationBundle\Form\OrganizationType', $organization);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('admin_org_edit', array('id' => $organization->getId()));
+            //return $this->redirectToRoute('admin_org_edit', array('id' => $organization->getId()));
         }
 
         return $this->spfRender('@SunshineOrganization/organization/edit.html.twig', array(
             'organization' => $organization,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 

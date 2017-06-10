@@ -9,7 +9,11 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 /**
  * Block
  *
- * @ORM\Table(name="sunshine_ui_block")
+ * @ORM\Table(name="sunshine_ui_block",
+ *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
+ *     indexes={
+ *         @ORM\Index(name="idx_ui_spf_fragment", columns={"spf_fragment"})
+ *     })
  * @ORM\Entity(repositoryClass="Sunshine\UIBundle\Repository\BlockRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
@@ -52,6 +56,13 @@ class Block
      * @ORM\Column(name="spf_state", type="boolean", nullable=true)
      */
     protected $spfState;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="spf_fragment", type="string", length=10, nullable=true)
+     */
+    protected $spfFragment;
 
     /**
      * @var \DateTime $createdAt
@@ -241,5 +252,29 @@ class Block
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set spfFragment
+     *
+     * @param string $spfFragment
+     *
+     * @return Block
+     */
+    public function setSpfFragment($spfFragment)
+    {
+        $this->spfFragment = $spfFragment;
+
+        return $this;
+    }
+
+    /**
+     * Get spfFragment
+     *
+     * @return string
+     */
+    public function getSpfFragment()
+    {
+        return $this->spfFragment;
     }
 }

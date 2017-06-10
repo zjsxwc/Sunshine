@@ -25,7 +25,6 @@ class CompanyController extends SpfController
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $companies = $em->getRepository('SunshineOrganizationBundle:Company')->findAll();
 
         return $this->spfRender('SunshineOrganizationBundle:company:index.html.twig', array(

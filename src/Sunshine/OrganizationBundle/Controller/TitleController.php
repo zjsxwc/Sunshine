@@ -3,16 +3,17 @@
 namespace Sunshine\OrganizationBundle\Controller;
 
 use Sunshine\OrganizationBundle\Entity\Title;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sunshine\UIBundle\Controller\SpfController;
 
 /**
  * Title controller.
  *
  * @Route("admin/org/title")
  */
-class TitleController extends Controller
+class TitleController extends SpfController
 {
     /**
      * Lists all title entities.

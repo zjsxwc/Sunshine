@@ -3,8 +3,6 @@ namespace Sunshine\UIBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sunshine\UIBundle\Entity\Twig;
-use Symfony\Component\HttpFoundation\Response;
 
 abstract class SpfController extends Controller
 {
@@ -12,10 +10,12 @@ abstract class SpfController extends Controller
     protected $params;
     protected $em;
     protected $twig;
+    protected $jsonArray;
 
     protected function spfRender($template, $params=[])
     {
         $requestStack = $this->get('request_stack');
+        $this->twig = $this->get('twig');
         $request = $requestStack->getCurrentRequest();
         $this->template = $template ? $template : null;
         $this->params = $params ? $params : [];
@@ -23,19 +23,45 @@ abstract class SpfController extends Controller
         $spf = $request->query->get('spf', '');
         if ($spf === 'navigate' && $template) {
             $data = $this->getNavigateData($template);
-            return new JsonResponse($data);
+            if ($data) {
+                return new JsonResponse($data);
+            }
         }
         return $this->render($template, $params);
     }
 
     protected function getNavigateData($template)
     {
-        $this->twig = $this->get('twig');
         $uniqueId = $this->getUniqueId($template);
         $this->em = $this->get('doctrine')->getManager();
         $blocks = $this->em->getRepository('SunshineUIBundle:Block')
             ->findByTemplate($uniqueId);
-        dump($blocks);
+        $this->jsonArray = [
+            'head' => '',
+            'body' => [],
+            'foot' => ''
+        ];
+
+        foreach ($blocks as $block) {
+            $blockContent = $this->renderBlock($template, $block->getName(), $this->params);
+            switch ($block->getSpfFragment()) {
+                case "body":
+                    $this->jsonArray['body'][$block->getName()] = $blockContent;
+                    break;
+                case "foot":
+                    $this->jsonArray['foot'] .= $blockContent;
+                    break;
+                case 'head':
+                    $this->jsonArray['head'] .= $blockContent;
+                    break;
+            }
+        }
+
+        $this->jsonArray = array_filter($this->jsonArray, function($value) { return $value !== ''; });
+
+        return !empty($this->jsonArray)
+            ? $this->jsonArray
+            : null;
     }
 
     protected function getUniqueId($template)
@@ -43,5 +69,11 @@ abstract class SpfController extends Controller
         $rootDir = str_replace('app', '', $this->get('kernel')->getRootDir());
         $path = $this->twig->getLoader()->getCacheKey(str_replace('@', '', $template));
         return crc32($rootDir.$path);
+    }
+
+    protected function renderBlock($template, $blockName, $params = array())
+    {
+        $template = $this->twig->loadTemplate($template);
+        return $template->renderBlock($blockName, $this->twig->mergeGlobals($params));
     }
 }

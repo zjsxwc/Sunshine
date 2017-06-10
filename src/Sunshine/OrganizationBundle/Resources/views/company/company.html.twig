@@ -15,10 +15,8 @@
         </section>
     {% endblock %}
 
-    <!-- Main content -->
-    <section class="content">
-        {% block main_content %}{% endblock %}
-    </section>
-    <!-- /.content -->
+    {% block content_box %}
+        {{ parent() }}
+    {% endblock %}
 
 {% endblock %}

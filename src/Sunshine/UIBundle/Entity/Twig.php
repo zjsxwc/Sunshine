@@ -9,7 +9,9 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 /**
  * Twig
  *
- * @ORM\Table(name="sunshine_ui_twig")
+ * @ORM\Table(name="sunshine_ui_twig",
+ *      options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"}
+ *     )
  * @ORM\Entity(repositoryClass="Sunshine\UIBundle\Repository\TwigRepository")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)

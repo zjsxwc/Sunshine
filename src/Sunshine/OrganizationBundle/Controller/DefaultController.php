@@ -4,8 +4,10 @@ namespace Sunshine\OrganizationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sunshine\UIBundle\Controller\SpfController;
 
-class DefaultController extends Controller
+class DefaultController extends SpfController
 {
     /**
      * Doctrine entity manager
@@ -16,12 +18,18 @@ class DefaultController extends Controller
     /**
      * @Route("/admin/org/organization", name="admin_org_front")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $this->em = $this->getDoctrine()->getManager();
         $org = $this->em->getRepository("SunshineOrganizationBundle:Organization")->find(1);
-        if ($org !== null) {
-            return $this->forward('SunshineOrganizationBundle:Organization:edit', ['organization' => $org]);
+        $editForm = $this->createForm('Sunshine\OrganizationBundle\Form\OrganizationType', $org);
+        $editForm->handleRequest($request);
+
+        if (null !== $org) {
+            return $this->spfRender('SunshineOrganizationBundle:organization:edit.html.twig', array(
+                'organization' => $org,
+                'edit_form' => $editForm->createView()
+            ));
         }
 
         $response = $this->forward('SunshineOrganizationBundle:Organization:new');

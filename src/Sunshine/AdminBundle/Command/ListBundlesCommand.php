@@ -56,7 +56,7 @@ class ListBundlesCommand extends ContainerAwareCommand
                     $twig = $this->getContainer()->get('twig');
                     $template = $twig->loadTemplate($twigFile);
                     dump('Template name: '.$template->getTemplateName());
-                    
+
                     $output->writeln("包含的 Block: ");
                     dump($template->getBlockNames());
 

@@ -10,13 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Sunshine\UIBundle\Controller\SpfController;
 
 /**
  * BusinessUnit controller.
  *
  * @Route("admin/org/bu")
  */
-class BusinessUnitController extends Controller
+class BusinessUnitController extends SpfController
 {
     /**
      * Lists all businessUnit entities.
@@ -32,7 +33,7 @@ class BusinessUnitController extends Controller
         $defaultCompany ? $defaultCompany : $defaultCompany = 'nothing';
         $company = $em->getRepository('SunshineOrganizationBundle:Company')->findAll();
         $businessUnits = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findBy(['company'=>$defaultCompany]);
-        return $this->render('@SunshineOrganization/businessunit/index.html.twig', array(
+        return $this->render('SunshineOrganizationBundle:businessunit:index.html.twig', array(
             'company' => $company,
             'defaultCompany' => $defaultCompany,
             'businessUnits' => $businessUnits

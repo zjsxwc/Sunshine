@@ -235,7 +235,17 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             {% block content %}
-
+                {% block content_header %} {% endblock %}
+                {% block content_box %}
+                    <!-- Main content -->
+                    <section class="content">
+                        <div id="main_content">
+                            {% block main_content %}
+                            {% endblock %}
+                        </div>
+                    </section>
+                    <!-- /.content -->
+                {% endblock %}
             {% endblock %}
         </div>
         <!-- /.content-wrapper -->
