@@ -39,9 +39,11 @@
 {% endblock %}
 
 {% block javascript %}
-    <script>
-        spf.init();
-    </script>
+    {% block initSpf %}
+        <script>
+            spf.init();
+        </script>
+    {% endblock %}
 {% endblock %}
 </body>
 </html>

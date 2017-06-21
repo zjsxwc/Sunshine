@@ -1,14 +1,30 @@
-{% extends "@SunshineOrganization/title/title.html.twig" %}
-
 {% block main_content %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    <input type="submit" value="Create" />
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_org_title_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}
+
+<script>
+    $(document).ready(function () {
+
+        function freshContinue() {
+            $('input[id=continue-input]').remove();
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'continue-input',
+                name: 'continue',
+                value: continueCreate,
+            }).appendTo('form');
+        }
+
+        var continueCreate = true;
+        continueCreate = $('#toggle-continue').prop('checked');
+        freshContinue();
+
+        $('#toggle-continue').change(function() {
+            continueCreate = $(this).prop('checked');
+            freshContinue();
+        })
+    })
+</script>

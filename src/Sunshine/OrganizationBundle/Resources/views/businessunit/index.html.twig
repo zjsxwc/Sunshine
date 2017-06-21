@@ -20,13 +20,17 @@
                     </div>
                 </div>
                 <div class="box-body pad table-responsive">
-                    <div class="easyui-layout" style="width:90%;min-height:500px">
+                    <div id="bu-body" class="easyui-layout" style="width:90%;min-height:500px">
                         <div data-options="region:'west',split:true" title="组织架构" style="width:25%;">
                             <ul id="bu" class="easyui-tree" data-options="url:'{{ path('admin_org_bu_tree_json', {'name': defaultCompany}) }}',method:'get',animate:true,lines:true"></ul>
                         </div>
                         <div data-options="region:'center',title:'部门明细'">
-                            <div class="bu_content">
-                                {{ businessUnits ? "修改或添加部门" : "请添加部门" }}
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="bu_content">
+                                        {{ businessUnits ? "修改或添加部门" : "请添加部门" }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -143,5 +147,9 @@
                 }]
             });
         }
+
+        var windowHeight = $(window).height();
+        var topHeight = 207;
+        $('#bu-body').css('height', windowHeight - topHeight);
     </script>
 {% endblock %}

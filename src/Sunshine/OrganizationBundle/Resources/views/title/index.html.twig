@@ -5,11 +5,12 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="btn-group btn-group-sm">
-                            <button type="button" class="btn btn-default" id="append"><span
-                                        class="glyphicon glyphicon-plus-sign"
-                                        aria-hidden="true"></span>{{ 'sunshine.label.create'|trans }}</button>
+                            <button type="button" class="btn btn-default" id="append">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                {{ 'sunshine.label.create'|trans }}
+                            </button>
                             <button type="button" class="btn btn-default" id="modify">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 {{ 'sunshine.label.modify'|trans }}
@@ -27,7 +28,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">{{ 'sunshine.label.importFromExcel'|trans }}</a></li>
-                                    <li><a href="#">{{ 'sunshine.label.downloadTemplate'|trans }}</a></li>
+                                    <li><a href="" id="export-template">{{ 'sunshine.label.downloadTemplate'|trans }}</a></li>
                                 </ul>
                             </div>
                             <button type="button" class="btn btn-default" id="export">
@@ -35,6 +36,7 @@
                                 {{ 'sunshine.label.export'|trans }}
                             </button>
                         </div>
+                        <input id="toggle-continue" type="checkbox" {{ continue ? 'checked' }} data-toggle="toggle" data-size="small" data-on="连续新建" data-off="不连续新建">
                     </div>
                     <div class="col-lg-4 pull-right">
                         <div class="input-group input-group-sm">
@@ -46,114 +48,47 @@
                 <div class="box-body pad table-responsive">
                     <div class="easyui-layout" id="title-body">
                         <div data-options="region:'center'">
-                            <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div id="data_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
-                                               aria-describedby="example1_info">
+                                        <table id="table" class="table table-bordered table-striped dataTable" role="grid"
+                                               aria-describedby="table_info">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th class="sorting_asc" tabindex="0" aria-controls="table" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 163px;" aria-sort="ascending">岗位类别
+                                                    style="width: 163px;" aria-sort="ascending">岗位类型
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="table" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending"
                                                     style="width: 201px;">岗位名称
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="table" rowspan="1"
                                                     colspan="1" aria-label="Platform(s): activate to sort column ascending"
                                                     style="width: 178px;">岗位代码
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
-                                                    colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                                    style="width: 138px;">岗位类型
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="table" rowspan="1"
                                                     colspan="1" aria-label="CSS grade: activate to sort column ascending"
                                                     style="width: 100px;">排序号
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">管理类</td>
-                                                <td>总统兼神父</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">管理类</td>
-                                                <td>总裁</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">管理类</td>
-                                                <td>副总</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">管理类</td>
-                                                <td>特别事业部副总</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">管理类</td>
-                                                <td>人事行政经理</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">技术类</td>
-                                                <td>高级研发工程师</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>6</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">职能类</td>
-                                                <td>厂务维护</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>7</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">职能类</td>
-                                                <td>薪资专员</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>8</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">职能类</td>
-                                                <td>招聘专员</td>
-                                                <td></td>
-                                                <td>单位自建岗位</td>
-                                                <td>9</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">职能类</td>
-                                                <td>物流专员</td>
-                                                <td></td>
-                                                <td>单位自荐岗位</td>
-                                                <td>10</td>
-                                            </tr>
+                                            {% for title in titles %}
+                                                <tr>
+                                                    <td>{{ title.type }}</td>
+                                                    <td>{{ title.name }}</td>
+                                                    <td>{{ title.code }}</td>
+                                                    <td>{{ title.orderNumber }}</td>
+                                                </tr>
+                                            {% endfor %}
                                             </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">岗位类别</th>
+                                                <th rowspan="1" colspan="1">岗位类型</th>
                                                 <th rowspan="1" colspan="1">岗位名称</th>
                                                 <th rowspan="1" colspan="1">岗位代码</th>
-                                                <th rowspan="1" colspan="1">岗位类型</th>
                                                 <th rowspan="1" colspan="1">排序号</th>
                                             </tr>
                                             </tfoot>
@@ -162,7 +97,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-options="region:'south',title:'增加岗位',split:true,collapsed:true" id="title-south"></div>
+                        <div data-options="region:'south',title:'增加岗位',split:true,collapsed:true" id="title-south" data-spy="scroll" data-target=".navbar" data-offset="50">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div id="title-detail"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -173,6 +114,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('datatables/dataTables.bootstrap.css', 'ltePlugin') }}">
+    <link rel="stylesheet" href="{{ asset('toggle/bootstrap-toggle.min.css', 'ltePlugin') }}">
 {% endblock %}
 
 {% block bottom_script %}
@@ -180,86 +122,75 @@
     <!-- DataTables -->
     <script src="{{ asset('datatables/jquery.dataTables.js', 'ltePlugin') }}"></script>
     <script src="{{ asset('datatables/dataTables.bootstrap.js', 'ltePlugin') }}"></script>
+    <script src="{{ asset('toggle/bootstrap-toggle.min.js', 'ltePlugin') }}"></script>
 {% endblock %}
 
 {% block javascript %}
     {{ parent() }}
     <script>
         $(document).ready(function () {
-            $("#example1").DataTable({
+
+            var table = $("#table").DataTable({
                 lengthChange: false,
-                searching: false
+                searching: false,
+                pageLength: 8
             });
+
+            var row_data;
+
+            $('#table tbody').on( 'click', 'tr', function () {
+                row_data = table.row(this).data();
+
+                if ($(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                } else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#append').click(function () {
+                $('#title-body').layout('expand', 'south');
+                $.pjax({url: "{{ path('admin_org_title_new') }}", container: '#title-detail'});
+                {# console.log(spf.load("{{ path('admin_org_title_new') }}")); #}
+
+                {#
+                $.ajax({
+                    type: "GET",
+                    url: "{{ path('admin_org_title_new') }}",
+                    dataType: "html",
+                    success: function (data) {
+                        $('#title-detail').html(data);
+                    }
+                }) #}
+            });
+
+            $('#modify').click(function () {
+                var titleName = row_data[1];
+                var url = "{{ path('admin_org_title_edit', {'name': 'titleName'}) }}";
+                url = url.replace('titleName', titleName);
+                $.pjax({url: url, container: '#title-detail'});
+                $('#title-body').layout('expand', 'south');
+            });
+
+            $('#export').click(function () {
+                var url = "{{ path('admin_org_title_export') }}";
+                window.open(url, '_blank');
+            })
+
+            $('#export-template').click(function () {
+                var url = "{{ path('admin_org_title_exportTemplate') }}";
+                window.open(url, '_blank');
+            })
+
+            {% if continue %}
+                $('#append').trigger('click');
+            {% endif %}
         })
 
         var windowHeight = $(window).height();
         var topHeight = 207;
         $('#title-body').css('height', windowHeight - topHeight);
         $('#title-south').css('height', (windowHeight - topHeight)/2);
-        
-        $(document).ready(function () {
-            $('#append').click(function () {
-                append();
-                $("div:contains('部门')").trigger('click');
-                $.pjax({url: "{{ path('admin_org_bu_new') }}", container: '.bu_content'});
-            });
-
-            $('#modify').click(function () {
-                var name = $('#bu').tree('getSelected').text;
-                var url = "{{ path('admin_org_bu_edit', {'name': 'buName' }) }}";
-                url = url.replace('buName', name);
-                $.pjax({url: url, container: '.bu_content'});
-            });
-
-            $('#delete').click(function () {
-                var name = $('#bu').tree('getSelected').text;
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('admin_org_bu_check') }}",
-                    dataType: "json",
-                    data: {name: name},
-                    success: function (data) {
-                        if (!data.approved) {
-                            $("#delete-warning").modal();
-                            return;
-                        }
-                        $('#delete-dialog').modal();
-                        $('#delete-bu-name').text(name);
-                    }
-                })
-            });
-        })
-
-        $("#delete-approved").click(function () {
-            var name = $('#bu').tree('getSelected').text;
-            $.ajax({
-                type: "POST",
-                url: "{{ url('admin_org_bu_delete') }}",
-                dataType: "json",
-                data: {name: name},
-                success: function (data) {
-                    if (!data.deleted) {
-                        console.log("删除失败:(");
-                        return;
-                    }
-
-                    $('#delete-dialog').modal('hide');
-                    window.location.href = "{{ url('admin_org_bu_index') }}";
-                }
-            })
-        })
-
-        function append() {
-            var tree = $('#bu');
-            var node = tree.tree('getSelected');
-            tree.tree('append', {
-                parent: (node?node.target:null),
-                data: [{
-                    text: '部门'
-                }]
-            });
-        }
-        #}
-
     </script>
 {% endblock %}

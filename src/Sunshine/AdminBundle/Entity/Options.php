@@ -107,6 +107,11 @@ class Options
         $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
     }
 
+    public function __toString()
+    {
+        return $this->getDisplayName();
+    }
+
     /**
     ┌─────────────────────────────────────────────────────────────────────┐
     │                                                                     │

@@ -24,3 +24,14 @@
 .bottom-button-center {
     text-align: center;
 }
+
+table.dataTable tbody tr.selected {
+    background-color: #B0BED9;
+}
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+    border-radius: 20px;
+}
+.toggle.ios .toggle-handle {
+    border-radius: 20px;
+}
