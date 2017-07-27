@@ -67,7 +67,7 @@ class BusinessUnit implements GedmoNode
      * 排序号
      * @var int
      *
-     * @ORM\Column(name="order_number", type="integer", options={"unsigned"=true})
+     * @ORM\Column(name="order_number", type="integer", options={"unsigned"=true}, nullable=true)
      */
     protected $orderNumber;
 
@@ -75,7 +75,7 @@ class BusinessUnit implements GedmoNode
      * 开启状态
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $enabled;
 

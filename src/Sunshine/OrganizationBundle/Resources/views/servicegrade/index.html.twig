@@ -1,4 +1,4 @@
-{% extends "@SunshineOrganization/title/title.html.twig" %}
+{% extends '@SunshineOrganization/servicegrade/serviceGrade.html.twig' %}
 
 {% block main_content %}
     <div class="row">
@@ -19,24 +19,7 @@
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 {{ 'sunshine.label.delete'|trans }}
                             </button>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                    <span class="glyphicon glyphicon-import" aria-hidden="true"></span>
-                                    {{ 'sunshine.label.import'|trans }}
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">{{ 'sunshine.label.importFromExcel'|trans }}</a></li>
-                                    <li><a href="" id="export-template">{{ 'sunshine.label.downloadTemplate'|trans }}</a></li>
-                                </ul>
-                            </div>
-                            <button type="button" class="btn btn-default" id="export">
-                                <span class="glyphicon glyphicon-export" aria-hidden="true"></span>
-                                {{ 'sunshine.label.export'|trans }}
-                            </button>
                         </div>
-                        <input id="toggle-continue" type="checkbox" {{ continue ? 'checked' }} data-toggle="toggle" data-size="small" data-on="连续新建" data-off="不连续新建">
                     </div>
                     <div class="col-lg-4 pull-right">
                         <div class="input-group input-group-sm">
@@ -46,7 +29,7 @@
                     </div>
                 </div>
                 <div class="box-body pad table-responsive">
-                    <div class="easyui-layout" id="title-body">
+                    <div class="easyui-layout" id="box-body">
                         <div data-options="region:'center'">
                             <div id="data_table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
@@ -55,41 +38,47 @@
                                                aria-describedby="table_info">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="table" rowspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="table" rowspan="1"
                                                     colspan="1"
-                                                    aria-label="Title type: activate to sort column descending"
-                                                    style="width: 163px;" aria-sort="ascending">岗位类型
+                                                    aria-label="ServiceGrade name: activate to sort column descending"
+                                                    style="width: 163px;" aria-sort="ascending">职务级别名称
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="table" rowspan="1"
-                                                    colspan="1" aria-label="Title name: activate to sort column ascending"
-                                                    style="width: 201px;">岗位名称
+                                                    colspan="1" aria-label="ServiceGrade code: activate to sort column ascending"
+                                                    style="width: 201px;">职务级别代码
+                                                </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="table" rowspan="1"
+                                                    colspan="1" aria-label="ServiceGrade order number: activate to sort column ascending"
+                                                    style="width: 178px;">职务级别序号
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="table" rowspan="1"
-                                                    colspan="1" aria-label="Title code: activate to sort column ascending"
-                                                    style="width: 178px;">岗位代码
+                                                    colspan="1" aria-label="ServiceGrade state: activate to sort column ascending"
+                                                    style="width: 100px;">状态
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="table" rowspan="1"
-                                                    colspan="1" aria-label="Title order number: activate to sort column ascending"
-                                                    style="width: 100px;">排序号
+                                                    colspan="1" aria-label="ServiceGrade description: activate to sort column ascending"
+                                                    style="width: 100px;">描述
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {% for title in titles %}
+                                            {% for serviceGrade in serviceGrades %}
                                                 <tr>
-                                                    <td>{{ title.type }}</td>
-                                                    <td>{{ title.name }}</td>
-                                                    <td>{{ title.code }}</td>
-                                                    <td>{{ title.orderNumber }}</td>
+                                                    <td>{{ serviceGrade.name }}</td>
+                                                    <td>{{ serviceGrade.code }}</td>
+                                                    <td>{{ serviceGrade.orderNum }}</td>
+                                                    <td>{{ serviceGrade.enabled ? 'sunshine.label.stateWork'|trans : 'sunshine.label.stateNotWork'|trans }}</td>
+                                                    <td>{{ serviceGrade.description }}</td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">岗位类型</th>
-                                                <th rowspan="1" colspan="1">岗位名称</th>
-                                                <th rowspan="1" colspan="1">岗位代码</th>
-                                                <th rowspan="1" colspan="1">排序号</th>
+                                                <th rowspan="1" colspan="1">职务级别名称</th>
+                                                <th rowspan="1" colspan="1">职务级别代码</th>
+                                                <th rowspan="1" colspan="1">职务级别序号</th>
+                                                <th rowspan="1" colspan="1">状态</th>
+                                                <th rowspan="1" colspan="1">描述</th>
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -97,10 +86,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-options="region:'south',title:'岗位明细',split:true,collapsed:true" id="title-south" data-spy="scroll" data-target=".navbar" data-offset="50">
+                        <div data-options="region:'south',title:'职务级别明细',split:true,collapsed:true" id="box-south" data-spy="scroll" data-target=".navbar" data-offset="50">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <div id="title-detail"></div>
+                                    <div id="detail"></div>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +103,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('datatables/dataTables.bootstrap.css', 'ltePlugin') }}">
-    <link rel="stylesheet" href="{{ asset('toggle/bootstrap-toggle.min.css', 'ltePlugin') }}">
 {% endblock %}
 
 {% block bottom_script %}
@@ -122,7 +110,6 @@
     <!-- DataTables -->
     <script src="{{ asset('datatables/jquery.dataTables.js', 'ltePlugin') }}"></script>
     <script src="{{ asset('datatables/dataTables.bootstrap.js', 'ltePlugin') }}"></script>
-    <script src="{{ asset('toggle/bootstrap-toggle.min.js', 'ltePlugin') }}"></script>
 {% endblock %}
 
 {% block javascript %}
@@ -133,7 +120,8 @@
             var table = $("#table").DataTable({
                 lengthChange: false,
                 searching: false,
-                pageLength: 8
+                pageLength: 8,
+                order: [2, 'asc']
             });
 
             var row_data;
@@ -150,47 +138,22 @@
             });
 
             $('#append').click(function () {
-                $('#title-body').layout('expand', 'south');
-                $.pjax({url: "{{ path('admin_org_title_new') }}", container: '#title-detail'});
-                {# console.log(spf.load("{{ path('admin_org_title_new') }}")); #}
-
-                {#
-                $.ajax({
-                    type: "GET",
-                    url: "{{ path('admin_org_title_new') }}",
-                    dataType: "html",
-                    success: function (data) {
-                        $('#title-detail').html(data);
-                    }
-                }) #}
+                $('#box-body').layout('expand', 'south');
+                $.pjax({url: "{{ path('admin_org_servicegrade_new') }}", container: '#detail'});
             });
 
             $('#modify').click(function () {
-                var titleName = row_data[1];
-                var url = "{{ path('admin_org_title_edit', {'name': 'titleName'}) }}";
-                url = url.replace('titleName', titleName);
-                $.pjax({url: url, container: '#title-detail'});
-                $('#title-body').layout('expand', 'south');
+                var modifyName = row_data[0];
+                var url = "{{ path('admin_org_servicegrade_edit', {'name': 'modifyName'}) }}";
+                url = url.replace('modifyName', modifyName);
+                $.pjax({url: url, container: '#detail'});
+                $('#box-body').layout('expand', 'south');
             });
-
-            $('#export').click(function () {
-                var url = "{{ path('admin_org_title_export') }}";
-                window.open(url, '_blank');
-            })
-
-            $('#export-template').click(function () {
-                var url = "{{ path('admin_org_title_exportTemplate') }}";
-                window.open(url, '_blank');
-            })
-
-            {% if continue %}
-                $('#append').trigger('click');
-            {% endif %}
         })
 
         var windowHeight = $(window).height();
         var topHeight = 207;
-        $('#title-body').css('height', windowHeight - topHeight);
-        $('#title-south').css('height', (windowHeight - topHeight)/2);
+        $('#box-body').css('height', windowHeight - topHeight);
+        $('#box-south').css('height', (windowHeight - topHeight)/2);
     </script>
 {% endblock %}

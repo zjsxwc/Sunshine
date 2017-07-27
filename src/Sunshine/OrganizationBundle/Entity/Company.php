@@ -82,6 +82,13 @@ class Company
      * @ORM\OneToOne(targetEntity="Sunshine\AdminBundle\Entity\Options")
      * @ORM\JoinColumn(name="organization_type_options_id", referencedColumnName="id", nullable=true)
      */
+
+    /**
+     * @var Options
+     *
+     * @ORM\ManyToOne(targetEntity="Sunshine\AdminBundle\Entity\Options")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
+     */
     protected $type;
 
     /**

@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sunshine\OrganizationBundle\Entity\BusinessUnit;
 
 /**
  * Company controller.
@@ -27,7 +28,7 @@ class CompanyController extends SpfController
         $em = $this->getDoctrine()->getManager();
         $companies = $em->getRepository('SunshineOrganizationBundle:Company')->findAll();
 
-        return $this->spfRender('SunshineOrganizationBundle:company:index.html.twig', array(
+        return $this->render('SunshineOrganizationBundle:company:index.html.twig', array(
             'companies' => $companies,
         ));
     }
@@ -47,9 +48,18 @@ class CompanyController extends SpfController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($company);
+
+            $organizationBU = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')
+                ->findOneBy(['name' => $company->getOrganization()->getName()]);
+
+            $companyBU = new BusinessUnit();
+            $companyBU->setName($company->getName());
+            $companyBU->setParent($organizationBU);
+            $em->persist($companyBU);
+
             $em->flush();
 
-            return $this->redirectToRoute('admin_org_company_show', array('id' => $company->getId()));
+            return $this->redirectToRoute('admin_org_company_index', array('id' => $company->getId()));
         }
 
         return $this->render('@SunshineOrganization/company/new.html.twig', array(

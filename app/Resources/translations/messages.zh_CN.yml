@@ -9,6 +9,8 @@ sunshine:
         importFromExcel: 导入Excel
         downloadTemplate: Excel模板下载
         export: 导出
+        stateWork: 开启
+        stateNotWork: 未开启
     menu:
         label: 菜单
         organization: 组织架构管理
@@ -66,6 +68,12 @@ sunshine:
                 code: 岗位代码
                 type: 岗位类别
                 orderNumber: 排序号
+                enabled: 状态
+                description: 描述
+            serviceGrade:
+                name: 职务级别名称
+                code: 职务级别代码
+                orderNumber: 职务级别序号
                 enabled: 状态
                 description: 描述
         warning:

@@ -3,7 +3,6 @@
 namespace Sunshine\OrganizationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sunshine\AdminBundle\Entity\Choice;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 

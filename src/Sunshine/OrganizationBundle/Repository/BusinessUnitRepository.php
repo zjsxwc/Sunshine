@@ -27,4 +27,23 @@ class BusinessUnitRepository extends NestedTreeRepository
 
         return $qb;
     }
+
+    /**
+     * @param string $companyName
+     * @param string $businessUnitName
+     * @return mixed
+     */
+    public function findByCompanyAndBUName($companyName, $businessUnitName)
+    {
+        $qb = $this->createQueryBuilder('bu')
+            ->select('bu')
+            ->join('bu.company', 'company')
+            ->where('company.name = :companyName')
+            ->setParameter('companyName', $companyName)
+            ->andWhere('bu.name = :businessUnitName')
+            ->setParameter('businessUnitName', $businessUnitName)
+            ->getQuery()->getOneOrNullResult();
+
+        return $qb;
+    }
 }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sunshine\UIBundle\Controller\SpfController;
+use Sunshine\OrganizationBundle\Entity\BusinessUnit;
 
 /**
  * Organization controller.
@@ -48,9 +49,14 @@ class OrganizationController extends SpfController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($organization);
+
+            $organizationBU = new BusinessUnit();
+            $organizationBU->setName($organization->getName());
+            $em->persist($organizationBU);
+
             $em->flush();
 
-            return $this->redirectToRoute('admin_org_show', array('id' => $organization->getId()));
+            return $this->redirectToRoute('admin_org_edit', array('id' => $organization->getId()));
         }
 
         return $this->render('@SunshineOrganization/organization/new.html.twig', array(

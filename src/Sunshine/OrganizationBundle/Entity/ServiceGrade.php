@@ -43,7 +43,7 @@ class ServiceGrade
      * 职务级别代码
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=20)
+     * @ORM\Column(name="code", type="string", length=20, nullable=true)
      */
     protected $code;
 
@@ -92,6 +92,27 @@ class ServiceGrade
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
+
+    /**
+     * Pre persist event listener
+     *
+     * @ORM\PrePersist
+     */
+    public function beforeSave()
+    {
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
+
+    /**
+     * Pre update event listener
+     *
+     * @ORM\PreUpdate
+     */
+    public function beforeUpdate()
+    {
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
+    }
 
     /**
     ┌─────────────────────────────────────────────────────────────────────┐

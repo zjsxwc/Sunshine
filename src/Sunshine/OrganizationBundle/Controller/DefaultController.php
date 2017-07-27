@@ -21,12 +21,12 @@ class DefaultController extends SpfController
     public function indexAction(Request $request)
     {
         $this->em = $this->getDoctrine()->getManager();
-        $org = $this->em->getRepository("SunshineOrganizationBundle:Organization")->find(1);
+        $org = $this->em->getRepository("SunshineOrganizationBundle:Organization")->findOneBy([]);
         $editForm = $this->createForm('Sunshine\OrganizationBundle\Form\OrganizationType', $org);
         $editForm->handleRequest($request);
 
         if (null !== $org) {
-            return $this->spfRender('SunshineOrganizationBundle:organization:edit.html.twig', array(
+            return $this->render('SunshineOrganizationBundle:organization:edit.html.twig', array(
                 'organization' => $org,
                 'edit_form' => $editForm->createView()
             ));

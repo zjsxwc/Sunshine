@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sunshine\UIBundle\Controller\SpfController;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * BusinessUnit controller.
@@ -24,12 +25,22 @@ class BusinessUnitController extends SpfController
      *
      * @Route("/", name="admin_org_bu_index")
      * @Method("GET")
+     * @param Request $request
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $session = new Session();
+        $companyName = $request->get('companyName');
 
-        $defaultCompany = $em->getRepository('SunshineOrganizationBundle:Company')->findOneBy([], ['orderNumber'=>'ASC']);
+        if (!$companyName) {
+            $defaultCompany = $em->getRepository('SunshineOrganizationBundle:Company')->findOneBy([], ['orderNumber'=>'ASC']);
+        } else {
+            $defaultCompany = $em->getRepository('SunshineOrganizationBundle:Company')->findOneBy(['name' => $companyName], ['orderNumber'=>'ASC']);
+            $session->set('company', $companyName);
+        }
+
         $defaultCompany ? $defaultCompany : $defaultCompany = 'nothing';
         $company = $em->getRepository('SunshineOrganizationBundle:Company')->findAll();
         $businessUnits = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findBy(['company'=>$defaultCompany]);
@@ -45,20 +56,22 @@ class BusinessUnitController extends SpfController
      *
      * @Route("/new", name="admin_org_bu_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function newAction(Request $request)
     {
         $businessUnit = new Businessunit();
         $form = $this->createForm('Sunshine\OrganizationBundle\Form\BusinessUnitType', $businessUnit);
-        $request->get('company');
+        $company = $request->request->get('sunshine_organizationbundle_businessunit');
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($businessUnit);
             $em->flush();
-
-            return $this->redirectToRoute('admin_org_bu_index');
+            return $this->redirectToRoute('admin_org_bu_index', ['companyName' => $company['company']]);
         }
 
         return $this->render('@SunshineOrganization/businessunit/new.html.twig', array(
@@ -77,6 +90,8 @@ class BusinessUnitController extends SpfController
     {
         $deleteForm = $this->createDeleteForm($businessUnit);
         $editForm = $this->createForm('Sunshine\OrganizationBundle\Form\BusinessUnitType', $businessUnit);
+        $company = $request->request->get('sunshine_organizationbundle_businessunit');
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -161,10 +176,11 @@ class BusinessUnitController extends SpfController
     {
         $companyName = $request->get('name');
         $em = $this->getDoctrine()->getManager();
-        $bu = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findByCompanyName($companyName);
+        //$bu = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findByCompanyName($companyName);
+        $bu = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->findOneBy(['name' => $companyName]);
         $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->setChildrenIndex('children');
         $trees = $em->getRepository('SunshineOrganizationBundle:BusinessUnit')->childrenHierarchy(
-            null,
+            $bu,
             false
         );
 

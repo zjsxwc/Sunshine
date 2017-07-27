@@ -1,3 +1,11 @@
+sunshine_organization_user:
+    resource: "@SunshineOrganizationBundle/Controller/UserController.php"
+    type:     annotation
+
+sunshine_organization_service_grade:
+    resource: "@SunshineOrganizationBundle/Controller/ServiceGradeController.php"
+    type:     annotation
+
 sunshine_organization_title:
     resource: "@SunshineOrganizationBundle/Controller/TitleController.php"
     type:     annotation

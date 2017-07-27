@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sunshine\OrganizationBundle\Entity\BusinessUnit;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class NameToBusinessUnitTransformer implements DataTransformerInterface
 {
@@ -39,13 +40,15 @@ class NameToBusinessUnitTransformer implements DataTransformerInterface
      */
     public function reverseTransform($buName)
     {
+        $session =  new Session;
+
         if (!$buName) {
             return;
         }
 
         $bu = $this->manager
             ->getRepository('SunshineOrganizationBundle:BusinessUnit')
-            ->findOneBy(['name' => $buName]);
+            ->findByCompanyAndBUName($session->get('company'), $buName);
 
         if (null === $bu) {
             throw new TransformationFailedException(sprintf(
