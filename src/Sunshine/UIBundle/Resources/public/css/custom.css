@@ -32,6 +32,11 @@ table.dataTable tbody tr.selected {
 .toggle.ios, .toggle-on.ios, .toggle-off.ios {
     border-radius: 20px;
 }
+
 .toggle.ios .toggle-handle {
     border-radius: 20px;
+}
+
+#collapseTwo .col-md-6 {
+    padding: 1px 2px;
 }

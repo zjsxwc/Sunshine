@@ -14,6 +14,7 @@ use Sunshine\OrganizationBundle\Entity\BusinessUnit;
  * Organization controller.
  *
  * @Route("admin/org/organization")
+ * 
  */
 class OrganizationController extends SpfController
 {

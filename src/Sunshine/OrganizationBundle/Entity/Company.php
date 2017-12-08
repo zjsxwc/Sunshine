@@ -76,14 +76,6 @@ class Company
     protected $alias;
 
     /**
-     * 公司类型
-     * @var Options
-     *
-     * @ORM\OneToOne(targetEntity="Sunshine\AdminBundle\Entity\Options")
-     * @ORM\JoinColumn(name="organization_type_options_id", referencedColumnName="id", nullable=true)
-     */
-
-    /**
      * @var Options
      *
      * @ORM\ManyToOne(targetEntity="Sunshine\AdminBundle\Entity\Options")

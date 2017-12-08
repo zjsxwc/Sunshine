@@ -5,6 +5,7 @@ namespace Sunshine\OrganizationBundle\Form;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -20,8 +21,11 @@ class BusinessUnitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'sunshine.organization.form.bu.name'])
-            ->add('code', TextType::class, ['label' => 'sunshine.organization.form.bu.code'])
+            ->add(
+                $builder->create('group1', FormType::class, ['inherit_data' => true])
+                    ->add('name', TextType::class, ['label' => 'sunshine.organization.form.bu.name'])
+                    ->add('code', TextType::class, ['label' => 'sunshine.organization.form.bu.code'])
+            )
             ->add('orderNumber', IntegerType::class, ['label' => 'sunshine.organization.form.bu.orderNumber'])
             ->add('company', CompanyNameHiddenType::class)
             ->add('parent', BusinessUnitParentHiddenType::class)

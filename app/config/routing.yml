@@ -1,3 +1,8 @@
+sunshine_form:
+    resource: "@SunshineFormBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 sunshine_organization_user:
     resource: "@SunshineOrganizationBundle/Controller/UserController.php"
     type:     annotation
