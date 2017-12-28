@@ -37,6 +37,8 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/app.min.js', 'lte') }}"></script>
     <script src="{{ asset('spf.js', 'js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 {% endblock %}
 
 {% block javascript %}

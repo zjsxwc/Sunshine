@@ -1,3 +1,6 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 sunshine_form:
     resource: "@SunshineFormBundle/Controller/"
     type:     annotation
